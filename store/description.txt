@@ -1,0 +1,6 @@
+An abstract composition for Pebble Time 2. Bold time, heart rate, steps and
+weather inhabit red, blue, yellow and white planes that change with your day.
+Tap or flick for a week of steps, heart range, temperature highs/lows and rain
+ahead. Includes a second time zone and optional larger labels.
+
+Weather data by Open-Meteo. Location is used on the phone to retrieve forecasts.

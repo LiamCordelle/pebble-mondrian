@@ -1,0 +1,119 @@
+pebble emu-button click back --emulator emery
+
+pebble emu-steps 6842 --emulator emery
+
+pebble emu-battery --percent 76 --emulator emery
+
+pebble install --emulator emery
+Installing app...
+App install succeeded.
+
+pebble emu-heart-rate 64 --emulator emery
+
+pebble screenshot --no-open --emulator emery /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-live.png
+Saved screenshot to /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-live.png
+N/A%[=                                                      ]   0.0 B/s 0:00:00
+N/A%[=                                                    ] 355.4 KiB/s 0:00:00
+N/A%[=                                                    ] 428.7 KiB/s 0:00:00
+
+pebble emu-tap --emulator emery
+
+pebble screenshot --no-open --emulator emery /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-detail.png
+Saved screenshot to /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-detail.png
+N/A%[=                                                      ]   0.0 B/s 0:00:00
+N/A%[=                                                    ] 323.9 KiB/s 0:00:00
+N/A%[=                                                    ] 404.5 KiB/s 0:00:00
+
+pebble screenshot --no-open --emulator emery /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-timeout.png
+Saved screenshot to /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-timeout.png
+N/A%[=                                                      ]   0.0 B/s 0:00:00
+N/A%[=                                                    ] 420.4 KiB/s 0:00:00
+N/A%[=                                                    ] 431.8 KiB/s 0:00:00
+
+pebble emu-tap --emulator emery
+
+pebble emu-tap --emulator emery
+
+pebble screenshot --no-open --emulator emery /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-toggle.png
+Saved screenshot to /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-toggle.png
+N/A%[=                                                      ]   0.0 B/s 0:00:00
+N/A%[=                                                    ] 679.0 KiB/s 0:00:00
+N/A%[=                                                    ] 555.4 KiB/s 0:00:00
+
+pebble emu-battery --percent 28 --emulator emery
+
+pebble screenshot --no-open --emulator emery /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-low-battery.png
+Saved screenshot to /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-low-battery.png
+N/A%[=                                                      ]   0.0 B/s 0:00:00
+N/A%[=                                                    ] 349.9 KiB/s 0:00:00
+N/A%[=                                                    ] 424.4 KiB/s 0:00:00
+
+pebble emu-battery --percent 62 --charging --emulator emery
+
+pebble screenshot --no-open --emulator emery /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-charging.png
+Saved screenshot to /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-charging.png
+N/A%[=                                                      ]   0.0 B/s 0:00:00
+N/A%[=                                                    ] 450.2 KiB/s 0:00:00
+N/A%[=                                                    ] 451.5 KiB/s 0:00:00
+
+pebble emu-battery --percent 76 --emulator emery
+
+pebble emu-button click back --emulator emery
+
+pebble emu-steps 6842 --emulator emery
+
+pebble emu-battery --percent 76 --emulator emery
+
+pebble install --emulator emery
+Installing app...
+App install succeeded.
+
+pebble emu-heart-rate 64 --emulator emery
+
+pebble screenshot --no-open --emulator emery /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-live.png
+Saved screenshot to /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-live.png
+N/A%[=                                                      ]   0.0 B/s 0:00:00
+N/A%[=                                                    ] 439.4 KiB/s 0:00:00
+N/A%[=                                                    ] 443.7 KiB/s 0:00:00
+
+pebble emu-tap --emulator emery
+
+pebble screenshot --no-open --emulator emery /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-detail.png
+Saved screenshot to /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-detail.png
+N/A%[=                                                      ]   0.0 B/s 0:00:00
+N/A%[=                                                    ] 343.7 KiB/s 0:00:00
+N/A%[=                                                    ] 420.8 KiB/s 0:00:00
+
+pebble screenshot --no-open --emulator emery /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-timeout.png
+Saved screenshot to /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-timeout.png
+N/A%[=                                                      ]   0.0 B/s 0:00:00
+N/A%[=                                                    ] 311.9 KiB/s 0:00:00
+N/A%[=                                                    ] 398.8 KiB/s 0:00:00
+
+pebble emu-tap --emulator emery
+
+pebble emu-tap --emulator emery
+
+pebble screenshot --no-open --emulator emery /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-toggle.png
+Saved screenshot to /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-toggle.png
+N/A%[=                                                      ]   0.0 B/s 0:00:00
+N/A%[=                                                    ] 331.6 KiB/s 0:00:00
+N/A%[=                                                    ] 411.1 KiB/s 0:00:00
+
+pebble emu-battery --percent 28 --emulator emery
+
+pebble screenshot --no-open --emulator emery /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-low-battery.png
+Saved screenshot to /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-low-battery.png
+N/A%[=                                                      ]   0.0 B/s 0:00:00
+N/A%[=                                                    ] 432.2 KiB/s 0:00:00
+N/A%[=                                                    ] 440.1 KiB/s 0:00:00
+
+pebble emu-battery --percent 62 --charging --emulator emery
+
+pebble screenshot --no-open --emulator emery /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-charging.png
+Saved screenshot to /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/shots/emulator-charging.png
+N/A%[=                                                      ]   0.0 B/s 0:00:00
+N/A%[=                                                    ] 349.9 KiB/s 0:00:00
+N/A%[=                                                    ] 419.1 KiB/s 0:00:00
+
+pebble emu-battery --percent 76 --emulator emery

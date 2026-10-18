@@ -1,0 +1,16 @@
+[22:22:27] kit_weather.c:38> Weather request 1792358443
+[22:22:38] ocess_manager.c:487> Heap Usage for App <Mondrian>: Total Size <111624B> Used <3096B> Still allocated <0B>
+[22:22:38] kit_shell.c:129> Mondrian kit 1.0 started (scenario 3, touch window 0ms)
+[22:22:38] kit_shell.c:27> Frame face 5ms
+[22:22:39] kit_weather.c:38> Weather request 1792358559
+[22:22:39] kit_shell.c:27> Frame face 5ms
+[22:22:39] kit_shell.c:27> Frame face 11ms
+[22:22:42] kit_shell.c:27> Frame detail 7ms
+[22:22:50] kit_shell.c:27> Frame face 9ms
+[22:22:54] kit_shell.c:27> Frame detail 5ms
+[22:22:55] kit_shell.c:27> Frame face 8ms
+[22:22:57] kit_shell.c:27> Frame face 8ms
+[22:23:00] ealth_service.c:677> Error fetching minute history
+[22:23:00] ealth_service.c:677> Error fetching minute history
+[22:23:00] kit_shell.c:27> Frame face 4ms
+[22:23:00] kit_shell.c:27> Frame face 6ms

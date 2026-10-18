@@ -1,0 +1,1 @@
+Initial release for Pebble Time 2: original composition, tap/flick detail view, health, weather, second time zone and configurable larger labels.
