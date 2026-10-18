@@ -4,7 +4,7 @@ A De Stijl composition whose planes respond to your day: red for heart rate,
 blue for steps, yellow for daylight, and a shrinking grey battery plane.
 The tap view recomposes it into a week of steps and heart/weather ranges.
 
-Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.0.2.
+Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.0.3.
 The default demo is **pixel-identical** to the original Watchface Lab proposal.
 Following Liam's review, the original geometry and compact Silkscreen captions
 are the default. Larger labels are an opt-in Clay setting; that setting enlarges
@@ -135,7 +135,7 @@ Source: https://github.com/LiamCordelle/pebble-mondrian
 
 Store: https://apps.repebble.com/ffa303a745844dac899c65b4
 
-Version 1.0.2 is the initial public release with corrected package metadata,
+Version 1.0.3 is the initial public release with corrected package metadata,
 following approval of the original composition. Store metadata and the two
 approved screenshots are in `store/`.
 

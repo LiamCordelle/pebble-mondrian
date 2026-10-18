@@ -1,1 +1,1 @@
-Initial release for Pebble Time 2, with corrected package version metadata: original composition, tap/flick detail view, health, weather, second time zone and configurable larger labels.
+Initial release for Pebble Time 2: original composition, tap/flick detail view, health, weather, second time zone and configurable larger labels. Finalized store assets and package metadata.
