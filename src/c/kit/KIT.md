@@ -166,5 +166,10 @@ weather reply, so the restarted face must use its persisted cache.
 Future faces: copy the highest-version sibling kit, update only your copy, bump
 this version and record fixes here. Keep Signal Deck read-only.
 
-Release baseline: Mondrian 1.0.1 is the first approved store build. Publishing
-metadata changes leave the copied-source kit at version 1.0.
+Release baseline: Mondrian 1.0.2 is the initial public release with corrected
+package metadata. Publishing metadata changes leave the copied-source kit at
+version 1.0.
+
+Release gotcha: after changing package.json version, use a clean build before
+uploading and inspect appinfo.json inside the PBW. An incremental SDK build
+can regenerate build/appinfo.json while leaving the previous PBW unchanged.
