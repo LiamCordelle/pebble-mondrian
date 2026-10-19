@@ -4,7 +4,7 @@ A De Stijl composition whose planes respond to your day: red for heart rate,
 blue for steps, yellow for daylight, and a shrinking grey battery plane.
 The tap view recomposes it into a week of steps and heart/weather ranges.
 
-Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.0.3.
+Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.0.4.
 The default demo is **pixel-identical** to the original Watchface Lab proposal.
 Following Liam's review, the original geometry and compact Silkscreen captions
 are the default. Larger labels are an opt-in Clay setting; that setting enlarges
@@ -39,6 +39,13 @@ Clay settings: watch/12/24-hour format, Celsius/Fahrenheit, step goal (10,000 by
 default), second time zone (NZ, UTC, LON, NYC, LA, TKY, SYD), weather, optional
 health demo fallback and larger labels. Settings apply live and persist.
 Normal health data is never replaced by demo values unless fallback is enabled.
+
+In 1.0.4, current heart rate uses the same instantaneous availability query as
+Signal Deck, independently of today's history. This fixes valid BPM being hidden
+when a midnight-to-now query exceeds PebbleOS's two-hour HR history limit. Later
+heart-rate events in the same minute update the model without extra redraws or
+historical queries. An unavailable/expired OS reading still shows `--`; the face
+does not prolong stale readings or use unfiltered raw BPM.
 
 Weather uses phone location and Open-Meteo. The watch schedules half-hourly
 refreshes with a 45-second watchdog and 1/5/15-minute retries. A complete valid
@@ -122,7 +129,7 @@ actual battery drain before choosing a different default.
 
 ## Kit and release files
 
-The reusable kit is documented at `src/c/kit/KIT.md`, version 1.0. It preserves
+The reusable kit is documented at `src/c/kit/KIT.md`, version 1.1. It preserves
 the lab contracts and includes watch/phone modules, validated weather caching,
 health and Clay settings. Later faces copy this source; they share no runtime.
 
@@ -141,3 +148,10 @@ approved screenshots are in `store/`.
 
 Project: MIT. Bundled font and Clay notices: `THIRD_PARTY_LICENSES.md`.
 Original rationale and measured font bearings: `PROTOTYPE_NOTES.md`.
+
+Current 1.0.4 validation: the original health module fails the new real-module
+regression test; the fix passes. All 32 renders retain the approved design.
+The final Emery check displays valid filtered HR well after the two-hour
+history window; the HR tile matches its host render pixel for pixel.
+See `shots/health-fix-face.png`, `shots/health-fix-detail.png` and
+`shots/health-fix-emulator.log`. Release 1.0.4 contains this heart-rate fix.

@@ -1,4 +1,4 @@
-# Watchface kit 1.0
+# Watchface kit 1.1
 
 Established by `pebble-mondrian` on 18 October 2026. No earlier sibling kit
 existed. This is a copied-source kit, with no runtime dependency on the lab,
@@ -104,8 +104,9 @@ Use `rolling_hour[i]`/`rolling_day[i]` for labels across DST transitions.
 ## Health, timing and touch
 
 Health subscriptions never request a faster heart-rate sampling period. Movement,
-heart-rate and sleep events coalesce to one sample per minute; no health event
-marks the canvas dirty. A significant update invalidates cached historical days.
+sleep and historical queries coalesce to one refresh per minute. Every heart-rate
+event captures the current filtered value, including later events in the same
+minute; no health event marks the canvas dirty. A significant update invalidates cached historical days.
 Completed hourly bins refresh once an hour; current-hour values refresh once a
 minute. Permission loss clears data, and demo fallback is explicitly opt-in.
 
@@ -135,6 +136,28 @@ least 27 seconds in QEMU before checking the phone-lost marker; reconnecting
 earlier cancels the notification. This is firmware debounce, not a rendering lag.
 
 ## Verification and changelog
+
+1.1 (19 October 2026): align current HR availability with Signal Deck:
+`health_service_metric_aggregate_averaged_accessible(HeartRateBPM,now,now,Avg,Once)`
+then `health_service_peek_current_value`. Never gate a current value on today's
+history. PebbleOS limits HR history queries to two hours, so midnight-to-now
+can be unsupported after 02:00 even with a valid current reading. The explicit
+aggregation query also avoids older firmware's generic HR accessibility issue.
+Capture each HR event without repeating history queries or redrawing the face.
+Regression tests compile the real `kit_health.c` against a controlled SDK stub:
+after-02:00 availability, midnight rollover, same-minute zero-to-valid/multiple
+samples, permission loss/restoration and OS-expired readings. The original code
+fails this regression; the fix passes. No stale-value cache or raw BPM fallback
+was added. The OS's filtered reading already has its own freshness policy.
+Final 1.0.4 Emery smoke check showed a valid current filtered BPM at 11:45,
+with the heart tile pixel-identical to the matching host render. Face/detail
+frames took 6–10 ms, with no app faults. Captures and logs are in
+`shots/health-fix-*`. Synthetic HR injection requires initializing emulator
+health totals first (`pebble emu-steps 6842`); the OS's filtered BPM may differ
+from the injected raw sample. The clock was restored after testing.
+Today's min/max remains independently subject to the firmware history limit;
+unavailable historical ranges must not hide a valid current BPM.
+
 
 1.0: first kit, established in Mondrian. Tests are `python3 tests/run.py`:
 cross-language weather encoding/decoding, atomic malformed-payload rejection,
@@ -176,3 +199,6 @@ can regenerate build/appinfo.json while leaving the previous PBW unchanged.
 
 For later uploads, pass `--replace-screenshots` when sending the same approved
 assets again; otherwise the CLI appends duplicate screenshots to the listing.
+
+Emulator cleanup: once the final check is complete, run `pebble kill` and
+verify QEMU has stopped. Do not leave the emulator running between tasks.

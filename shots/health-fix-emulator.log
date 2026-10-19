@@ -1,0 +1,4 @@
+[11:45:08] kit_weather.c:26> Weather watchdog expired
+[11:45:13] kit_shell.c:27> Frame detail 6ms
+[11:45:14] kit_shell.c:27> Frame face 10ms
+[11:45:15] kit_shell.c:27> Frame detail 7ms

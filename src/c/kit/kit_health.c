@@ -39,17 +39,30 @@ static time_t local_boundary(struct tm t, int day_delta, int hour) {
   // A skipped local hour normalises forward, making the missing bucket empty.
   return latest;
 }
+static void refresh_heart_rate(time_t now) {
+  // Match the instantaneous query used by peek_current_value (Signal Deck).
+  // A midnight-to-now query can exceed PebbleOS's two-hour HR history limit,
+  // even while a valid current filtered reading is available.
+  bool access = (health_service_metric_aggregate_averaged_accessible(
+      HealthMetricHeartRateBPM,now,now,HealthAggregationAvg,
+      HealthServiceTimeScopeOnce) & HealthServiceAccessibilityMaskAvailable) != 0;
+  if (access != s_hr_access) {s_history_hour=-1;s_hr_access=access;}
+  s_health.heart_rate = access ? health_service_peek_current_value(HealthMetricHeartRateBPM) : 0;
+  s_health.hr_ok = access && s_health.heart_rate > 0;
+}
 static void refresh(const LabData *d);
 static void event(HealthEventType type, void *context) {
   if (type == HealthEventSignificantUpdate) {s_day=-1;s_history_hour=-1;}
-  // Health events may update the model once per minute, and never mark the
-  // canvas dirty. The shell's next minute tick presents the refreshed model.
+  // History work is coalesced, but a later HR event in the same minute must
+  // still capture the latest filtered value. Neither path redraws the canvas.
   time_t now=time(NULL);
   if(s_last_minute!=now/60 && (type==HealthEventMovementUpdate ||
       type==HealthEventHeartRateUpdate || type==HealthEventSleepUpdate ||
       type==HealthEventSignificantUpdate)) {
     LabData clock={0};clock.epoch=now;clock.now=*localtime(&now);
     refresh(&clock);s_last_minute=now/60;
+  } else if (type==HealthEventHeartRateUpdate || type==HealthEventSignificantUpdate) {
+    refresh_heart_rate(now);
   }
 }
 static void refresh(const LabData *d) {
@@ -69,11 +82,7 @@ static void refresh(const LabData *d) {
   s_health.steps_typical = steps_ok ? aggregate(HealthMetricStepCount,day,now,
       HealthAggregationSum,HealthServiceTimeScopeDailyWeekdayOrWeekend) : 0;
   s_health.steps_by_day[0] = lab_clamp(s_health.steps,0,65535);
-  bool hr_access=available(HealthMetricHeartRateBPM,day,now);
-  if(hr_access!=s_hr_access){s_history_hour=-1;s_hr_access=hr_access;}
-  s_health.hr_ok = hr_access;
-  s_health.heart_rate = s_health.hr_ok ? health_service_peek_current_value(HealthMetricHeartRateBPM) : 0;
-  s_health.hr_ok = s_health.hr_ok && s_health.heart_rate > 0;
+  refresh_heart_rate(now);
   s_health.hr_min = aggregate(HealthMetricHeartRateBPM,day,now,HealthAggregationMin,HealthServiceTimeScopeOnce);
   s_health.hr_max = aggregate(HealthMetricHeartRateBPM,day,now,HealthAggregationMax,HealthServiceTimeScopeOnce);
   for (int h = 0; h < 24; ++h) {

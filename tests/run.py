@@ -13,6 +13,11 @@ def run(args): subprocess.run(args,cwd=ROOT,check=True)
 run(['node','tests/phone.test.js'])
 run(['cc','-std=c11','-Wall','-Wextra','-Werror','tests/core.test.c','src/c/kit/kit_core.c','-o',str(OUT/'core-tests')])
 run([str(OUT/'core-tests'),str(OUT/'weather.bin')])
+run(['cc','-std=c11','-D_DARWIN_C_SOURCE','-DPBL_HEALTH',
+     '-Dtime=health_test_time','-Itests/health-stubs','-Wall','-Wextra','-Werror',
+     '-Wno-unused-parameter','tests/health.test.c','src/c/kit/kit_health.c',
+     'src/c/kit/kit_core.c','-o',str(OUT/'health-tests')])
+run([str(OUT/'health-tests')])
 libpath=OUT/'libkit.dylib'
 run(['cc','-std=c11','-shared','-fPIC','src/c/kit/kit_core.c','-o',str(libpath)])
 lib=ctypes.CDLL(str(libpath))
