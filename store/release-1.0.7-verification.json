@@ -1,0 +1,13 @@
+{
+  "version": "1.0.7",
+  "public_listing_visible": true,
+  "public_version_verified": true,
+  "public_pbw_all_entries_match_build": true,
+  "pbw_uuid_and_version_verified": true,
+  "gallery_unchanged": true,
+  "render_scenes": 36,
+  "shared_kit_revision": "42dd429169de83fcd45821b425ab8bd4bc759d81",
+  "source_revision": "7bd8b4b3f453d791c175a750218503687a89ed93",
+  "pbw_sha256": "9857c4cdbad5e906873f94d2739134317c7decfa45aea4079d354999206c5540",
+  "published_pbw_sha256": "9857c4cdbad5e906873f94d2739134317c7decfa45aea4079d354999206c5540"
+}

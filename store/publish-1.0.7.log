@@ -1,0 +1,18 @@
+Appstore auth preflight...
+API base: https://appstore-api.repebble.com
+Developer link check successful.
+Building app...
+App build successful.
+PBW Metadata
+Using PBW: /Users/lcordelle/Documents/pebble/pebble-watchface-agent-skill/pebble-mondrian/build/pebble-mondrian.pbw
+PBW app UUID: 3bd45600-4ca0-49b6-8129-f840caaf0201
+Name: Mondrian
+PBW Version: 1.0.7
+Publish Version: 1.0.7
+Platforms: emery
+Resolved existing appstore app ID: ffa303a745844dac899c65b4
+Publishing release to Pebble Appstore...
+Waiting for release upload response [                        ]   0sWaiting for release upload response [=                       ]   0sWaiting for release upload response [==                      ]   0sWaiting for release upload response [===                     ]   1sWaiting for release upload response [====                    ]   1sWaiting for release upload response [=====                   ]   1sWaiting for release upload response [========================]   1s
+Release created successfully
+Visit the dashboard to add/edit your changelog: https://appstore-api.repebble.com/dashboard
+App page: https://apps.rePebble.com/ffa303a745844dac899c65b4
