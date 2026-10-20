@@ -4,7 +4,7 @@ A De Stijl composition whose planes respond to your day: red for heart rate,
 blue for steps, yellow for daylight, and a shrinking grey battery plane.
 The tap view recomposes it into a week of steps and heart/weather ranges.
 
-Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.0.6.
+Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.0.7.
 The default demo is **pixel-identical** to the original Watchface Lab proposal.
 Following Liam's review, the original geometry and compact Silkscreen captions
 are the default. Larger labels are an opt-in Clay setting; that setting enlarges
@@ -204,3 +204,5 @@ Reconstruction of older readings is covered by deterministic fixtures; physical
 Time 2 retention remains a device check. The saved emulator profile was restored
 and QEMU stopped. See `shots/history-*`. Publishing metadata and downloaded
 artifact verification are recorded in `store/published.json`.
+
+Release 1.0.7: built with the shared kit 2.0.0; artwork and settings are preserved.

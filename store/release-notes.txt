@@ -1,1 +1,1 @@
-Correct today's heart-rate range using recorded minute history, including earlier readings from other watchfaces. Mark incomplete history with BPM* and remove the hourly-average fallback. Preserve the existing dynamic layout and watchfaces-list icon.
+Built with the shared watchface kit so future health, weather and settings improvements can be maintained consistently across watchfaces. Preserves the current appearance, settings and recorded-minute heart-rate history.
