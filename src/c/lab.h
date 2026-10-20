@@ -38,8 +38,8 @@ typedef struct {
   uint16_t steps_by_hour[24]; // today's steps per clock hour; future hours = 0
   bool hr_ok;
   int heart_rate;             // bpm (valid when hr_ok)
-  int hr_min;                 // today's lowest bpm, 0 = unknown
-  int hr_max;                 // today's highest bpm, 0 = unknown
+  int hr_min;                 // today's lowest recorded minute BPM, 0 = unknown
+  int hr_max;                 // today's highest recorded minute BPM, 0 = unknown
   int active_minutes;
   int32_t distance_m;
   int active_kcal;
@@ -90,6 +90,7 @@ typedef struct {
   uint8_t rolling_code[24];
   uint8_t rolling_hour[24], rolling_day[24]; // local labels, including DST transitions
   uint8_t rolling_count;
+  bool hr_range_partial;      // kit 1.2: loading, missing records or read failure
 } LabData;
 
 // One watchface design. Everything except this struct stays `static` in the

@@ -4,7 +4,7 @@ A De Stijl composition whose planes respond to your day: red for heart rate,
 blue for steps, yellow for daylight, and a shrinking grey battery plane.
 The tap view recomposes it into a week of steps and heart/weather ranges.
 
-Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.0.4.
+Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.0.6.
 The default demo is **pixel-identical** to the original Watchface Lab proposal.
 Following Liam's review, the original geometry and compact Silkscreen captions
 are the default. Larger labels are an opt-in Clay setting; that setting enlarges
@@ -46,6 +46,16 @@ when a midnight-to-now query exceeds PebbleOS's two-hour HR history limit. Later
 heart-rate events in the same minute update the model without extra redraws or
 historical queries. An unavailable/expired OS reading still shows `--`; the face
 does not prolong stale readings or use unfiltered raw BPM.
+
+The 1.0.6 detail range is the lowest/highest valid **recorded minute BPM** since
+local midnight. It reads the watch's stored minute history in small batches,
+including earlier readings recorded while another face was active. `BPM*` means
+history is loading, incomplete or temporarily unreadable; `--` means no usable
+recorded BPM. The range never substitutes hourly averages. It does not represent
+every brief sub-minute peak. Completed records are cached in memory, new minutes
+are appended, and midnight/time changes or significant health sync rebuild it.
+The hourly HR data also uses those same records. Physical-watch retention and
+coverage must still be checked on a Time 2.
 
 Weather uses phone location and Open-Meteo. The watch schedules half-hourly
 refreshes with a 45-second watchdog and 1/5/15-minute retries. A complete valid
@@ -129,7 +139,7 @@ actual battery drain before choosing a different default.
 
 ## Kit and release files
 
-The reusable kit is documented at `src/c/kit/KIT.md`, version 1.1. It preserves
+The reusable kit is documented at `src/c/kit/KIT.md`, version 1.2. It preserves
 the lab contracts and includes watch/phone modules, validated weather caching,
 health and Clay settings. Later faces copy this source; they share no runtime.
 
@@ -155,3 +165,14 @@ The final Emery check displays valid filtered HR well after the two-hour
 history window; the HR tile matches its host render pixel for pixel.
 See `shots/health-fix-face.png`, `shots/health-fix-detail.png` and
 `shots/health-fix-emulator.log`. Release 1.0.4 contains this heart-rate fix.
+
+1.0.6 validation: minute-history, health, protocol and DST tests pass;
+36 renders preserve the default artwork. The final clean-profile Emery check
+verified Mondrian's active UUID, completed SDK history scans and the detail
+timeout without app faults (4–11ms frames). The synthetic profile supplied a
+completed-minute BPM of 64, displayed as the partial recorded range `64–64`
+with `BPM*`. The earlier empty-history run correctly displayed `BPM* --`.
+Reconstruction of older readings is covered by deterministic fixtures; physical
+Time 2 retention remains a device check. The saved emulator profile was restored
+and QEMU stopped. See `shots/history-*`. Publishing metadata and downloaded
+artifact verification are recorded in `store/published.json`.

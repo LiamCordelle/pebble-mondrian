@@ -16,8 +16,13 @@ run([str(OUT/'core-tests'),str(OUT/'weather.bin')])
 run(['cc','-std=c11','-D_DARWIN_C_SOURCE','-DPBL_HEALTH',
      '-Dtime=health_test_time','-Itests/health-stubs','-Wall','-Wextra','-Werror',
      '-Wno-unused-parameter','tests/health.test.c','src/c/kit/kit_health.c',
-     'src/c/kit/kit_core.c','-o',str(OUT/'health-tests')])
+     'src/c/kit/kit_hr_history.c','src/c/kit/kit_core.c','-o',str(OUT/'health-tests')])
 run([str(OUT/'health-tests')])
+run(['cc','-std=c11','-D_DARWIN_C_SOURCE','-DPBL_HEALTH',
+     '-Itests/health-stubs','-Wall','-Wextra','-Werror','-Wno-unused-parameter',
+     'tests/history.test.c','src/c/kit/kit_hr_history.c','src/c/kit/kit_core.c',
+     '-o',str(OUT/'history-tests')])
+run([str(OUT/'history-tests')])
 libpath=OUT/'libkit.dylib'
 run(['cc','-std=c11','-shared','-fPIC','src/c/kit/kit_core.c','-o',str(libpath)])
 lib=ctypes.CDLL(str(libpath))

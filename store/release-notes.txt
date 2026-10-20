@@ -1,1 +1,1 @@
-Fix heart rate showing dashes despite an available current reading. Use instantaneous HR availability independently of daily history and capture later readings in the same minute without extra redraws or faster sensor sampling.
+Correct today's heart-rate range using recorded minute history, including earlier readings from other watchfaces. Mark incomplete history with BPM* and remove the hourly-average fallback. Preserve the existing dynamic layout and watchfaces-list icon.

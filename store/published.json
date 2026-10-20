@@ -1,0 +1,13 @@
+{
+  "version": "1.0.5",
+  "app_id": "ffa303a745844dac899c65b4",
+  "store_url": "https://apps.repebble.com/ffa303a745844dac899c65b4",
+  "download_url": "https://appstore-api.repebble.com/api/assets/pbw/ffa303a745844dac899c65b4/1.0.5/6b3d25c1-698e-4bf7-bb18-aa0d5c5bf587.pbw",
+  "uuid": "3bd45600-4ca0-49b6-8129-f840caaf0201",
+  "published_date": "2026-10-19T17:00:28.067",
+  "release_notes": "Add a colour De Stijl grid icon in the watch's Watchfaces list, with red, blue and yellow panels.",
+  "screenshots_unchanged": true,
+  "downloaded_pbw_matches_build_after_uuid_case_normalization": true,
+  "local_pbw_sha256": "47aae2436e88d8369790f14cf13b2feb7523271bf14c5d2ec9f1a4c165c575cb",
+  "published_pbw_sha256": "47aae2436e88d8369790f14cf13b2feb7523271bf14c5d2ec9f1a4c165c575cb"
+}

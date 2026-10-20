@@ -1,4 +1,4 @@
-# Watchface kit 1.1
+# Watchface kit 1.2
 
 Established by `pebble-mondrian` on 18 October 2026. No earlier sibling kit
 existed. This is a copied-source kit, with no runtime dependency on the lab,
@@ -10,7 +10,7 @@ Copy `src/c/kit/` and `src/pkjs/kit/` into the next face. Keep the lab contract
 (`lab.h`, `lab_common.c`, scenario definitions in `lab_data.c`, `lab_designs.h`).
 Kit additions to `LabData` must be copied too: temperature unit, optional label
 size, tomorrow/next sun fields, maximum UV, rolling temperature/rain/code,
-rolling local hour/day labels and `rolling_count`.
+rolling local hour/day labels, `rolling_count` and `hr_range_partial`.
 
 `lab_main.c` calls `kit_shell_run(&your_design)`. The live branch of
 `lab_data_refresh` sets local time/device state and calls `kit_fill`; fixed lab
@@ -31,6 +31,7 @@ unchanged. No button handlers are needed for a watchface.
 | `kit.h` | watch-side integration API and persisted settings |
 | `kit.c` | single AppMessage dispatcher; registers before opening buffers |
 | `kit_core.c/.h` | versioned weather decoder, validation, calendar, DST and retry state |
+| `kit_hr_history.c` | batched minute-record reconstruction of today's HR range/hourly averages |
 | `kit_health.c` | permission-aware health, event coalescing, daily/hourly history caches |
 | `kit_settings.c` | staged settings validation, persistence and world-clock projection |
 | `kit_weather.c` | request correlation, watchdog/retries, cache and LabData projection |
@@ -137,6 +138,44 @@ earlier cancels the notification. This is firmware debounce, not a rendering lag
 
 ## Verification and changelog
 
+1.2 (20 October 2026): reconstruct today's HR extrema and hourly averages from
+`health_service_get_minute_history`, not midnight-to-now aggregate queries.
+The two-hour aggregate API limit does not bound this separate minute-file path.
+A 60-record stack buffer is read in 25ms timer batches; no day-sized allocation,
+extra redraw, sensor-period change or own persisted health database is needed.
+Completed minutes are scanned once, then only new minutes are appended. A
+significant health sync, local-day/time-zone change or clock rollback rebuilds
+the cache. Repeated DST hours combine and a missing hour stays empty.
+Ignore invalid records and BPM 0/255. Continue short reads/gaps using returned
+start/count, validate SDK bounds, and never trust a mutable end time as progress.
+Permission loss cancels reads and clears the range. No current sample is required
+if earlier recorded values exist. A missing window/read failure is retried during
+an hourly rescan; a timer allocation failure is retried at the next refresh.
+`hr_range_partial` covers loading, invalid/missing records and read failures.
+The detail caption is `BPM*` while partial, `BPM` otherwise; zero extrema show
+`--`. The misleading hourly-average fallback has been removed. Values represent
+recorded minute BPMs, so sub-minute peaks are not promised.
+Validation: the real-module history fixture reconstructs noon extrema from
+morning records older than two hours, resumes short reads, handles failures and
+missing records, repairs coverage on hourly rescan, and handles 23/25-hour local
+days. Health permission-loss tests also assert that pending reads are cancelled.
+All 36 render scenes pass, including missing extrema with hourly averages still
+present (the caption correctly shows dashes) and partial captions in both sizes.
+Final clean-profile QEMU run verified Mondrian's active UUID, completed actual SDK
+history calls, kept current BPM working, and returned from detail after eight
+seconds without an app fault. Observed frames were 4–11ms. A completed synthetic
+minute was displayed as the partial recorded range `64–64` with `BPM*`; the
+earlier empty-history run displayed `BPM* --`. These checks do not establish
+retention of older records on physical hardware. Evidence: `shots/history-*`.
+Run `tools/emulator_history_check.py --clean-profile` with pebble-tool's Python
+to repeat; it preserves/restores the existing Emery profile and always kills
+the emulator. A stale existing profile accepted installation but kept another
+face running, so UUID verification is mandatory.
+The firmware source supports stored records older than two hours, but real-watch
+history availability still needs verification; QEMU's synthetic history is not
+proof of physical-watch retention or sensor coverage.
+
+
 1.1 (19 October 2026): align current HR availability with Signal Deck:
 `health_service_metric_aggregate_averaged_accessible(HeartRateBPM,now,now,Avg,Once)`
 then `health_service_peek_current_value`. Never gate a current value on today's
@@ -155,8 +194,8 @@ frames took 6–10 ms, with no app faults. Captures and logs are in
 `shots/health-fix-*`. Synthetic HR injection requires initializing emulator
 health totals first (`pebble emu-steps 6842`); the OS's filtered BPM may differ
 from the injected raw sample. The clock was restored after testing.
-Today's min/max remains independently subject to the firmware history limit;
-unavailable historical ranges must not hide a valid current BPM.
+The old daily-range aggregate limitation described here is superseded by the
+minute-record reconstruction in kit 1.2; current BPM remains independent.
 
 
 1.0: first kit, established in Mondrian. Tests are `python3 tests/run.py`:
@@ -202,3 +241,8 @@ assets again; otherwise the CLI appends duplicate screenshots to the listing.
 
 Emulator cleanup: once the final check is complete, run `pebble kill` and
 verify QEMU has stopped. Do not leave the emulator running between tasks.
+
+Sibling kit note (20 October 2026): Underground kit 1.3 combines this recorded
+minute-history fix with its own kit 1.2 pace formatter. Future faces should copy
+Underground 1.3 as the newest combined kit. Mondrian keeps its original settings
+and dynamic range-band geometry.

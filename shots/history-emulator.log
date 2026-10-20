@@ -1,0 +1,16 @@
+[17:10:35] kit_shell.c:129> Mondrian kit 1.2 started (scenario 3, touch window 0ms)
+[17:10:35] kit_shell.c:27> Frame face 7ms
+[17:10:35] kit_weather.c:38> Weather request 1792512636
+[17:10:35] kit_shell.c:27> Frame face 4ms
+[17:10:35] kit_weather.c:93> Weather snapshot accepted (48 hours)
+[17:10:35] kit_shell.c:27> Frame face 7ms
+[17:10:35] it_hr_history.c:60> HR minute history ready: data=0 partial=1
+[17:10:35] kit_shell.c:27> Frame face 7ms
+[17:11:00] it_hr_history.c:60> HR minute history ready: data=1 partial=1
+[17:11:00] kit_shell.c:27> Frame face 10ms
+[17:11:53] kit_shell.c:27> Frame detail 7ms
+[17:11:54] kit_shell.c:27> Frame face 9ms
+[17:11:55] kit_shell.c:27> Frame detail 8ms
+[17:12:00] kit_shell.c:27> Frame detail 7ms
+[17:12:00] it_hr_history.c:60> HR minute history ready: data=1 partial=1
+[17:12:03] kit_shell.c:27> Frame face 11ms

@@ -26,6 +26,10 @@ scenes=[('demo',0,False,{}),('stress',1,False,{}),('empty',2,False,{}),
         ('large-stress',1,False,{'LARGE_LABELS':1,'FAHRENHEIT':1,'UV':120}),
         ('large-detail-stress',1,True,{'LARGE_LABELS':1,'FAHRENHEIT':1}),
         ('large-empty',2,False,{'LARGE_LABELS':1}),
+        ('partial-heart',0,True,{'HR_PARTIAL':1}),
+        ('partial-heart-large',0,True,{'HR_PARTIAL':1,'LARGE_LABELS':1,'HR_MIN':90,'HR_MAX':130}),
+        ('no-range',0,True,{'NO_RANGE':1}),
+        ('partial-no-range',0,True,{'NO_RANGE':1,'HR_PARTIAL':1}),
         ('heart-220',0,False,{'HR':220}),('step-sliver',0,False,{'STEPS':100}),
         ('near-goal',0,False,{'STEPS':9870})]
 for name,code in [('sun',0),('partly',2),('cloud',3),('rain',63),('snow',73),('storm',95),('fog',45)]:

@@ -263,6 +263,8 @@ void lab_data_refresh(LabData *d) {
   d->heart_rate=preview_int("MONDRIAN_HR",d->heart_rate);
   d->hr_min=preview_int("MONDRIAN_HR_MIN",d->hr_min);
   d->hr_max=preview_int("MONDRIAN_HR_MAX",d->hr_max);
+  d->hr_range_partial=preview_int("MONDRIAN_HR_PARTIAL",0);
+  if(preview_int("MONDRIAN_NO_RANGE",0))d->hr_min=d->hr_max=0;
   d->steps=preview_int("MONDRIAN_STEPS",d->steps);
   if(preview_int("MONDRIAN_NO_HEALTH",0)) {
     d->steps_ok=d->hr_ok=false;d->steps=d->heart_rate=d->hr_min=d->hr_max=0;

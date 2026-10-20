@@ -9,6 +9,19 @@ static bool s_permission=true;
 static HealthEventHandler s_callback;
 static void *s_context;
 static KitSettings s_settings;
+struct AppTimer { int unused; };
+static AppTimer s_timer;
+static bool s_history_pending;
+AppTimer *app_timer_register(uint32_t ms,AppTimerCallback cb,void *context) {
+  (void)ms;(void)cb;(void)context;assert(!s_history_pending);
+  s_history_pending=true;return &s_timer;
+}
+bool app_timer_cancel(AppTimer *timer) {
+  assert(timer==&s_timer);s_history_pending=false;return true;
+}
+uint32_t health_service_get_minute_history(HealthMinuteData *data,uint32_t count,time_t *a,time_t *b) {
+  (void)data;(void)count;(void)a;(void)b;return 0;
+}
 
 time_t health_test_time(time_t *out) { if(out)*out=s_now;return s_now; }
 const KitSettings *kit_settings_get(void) { return &s_settings; }
@@ -71,12 +84,13 @@ int main(void) {
   d=fill();assert(d.hr_ok && d.heart_rate==81 && s_history_reads==history);
   // Permission loss must never leave a cached reading on screen.
   s_permission=false;emit(HealthEventSignificantUpdate);
-  d=fill();assert(!d.hr_ok && d.heart_rate==0);
+  d=fill();assert(!d.hr_ok && d.heart_rate==0 && !d.hr_min && !d.hr_max);
+  assert(!s_history_pending);
   s_permission=true;s_bpm=76;emit(HealthEventSignificantUpdate);
   d=fill();assert(d.hr_ok && d.heart_rate==76);
   // Let the OS expire its filtered value: never resurrect a raw/demo/stale BPM.
   s_now+=60;s_bpm=0;d=fill();assert(!d.hr_ok && d.heart_rate==0);
   assert(s_current_queries>0);
-  kit_health_deinit();assert(!s_callback);
+  kit_health_deinit();assert(!s_callback && !s_history_pending);
   puts("Health tests passed: all-day current HR, same-minute events, permission loss, expiry and bounded history work.");
 }

@@ -7,6 +7,17 @@
 #include <time.h>
 typedef struct GContext GContext;
 typedef struct DictionaryIterator DictionaryIterator;
+typedef struct AppTimer AppTimer;
+typedef void (*AppTimerCallback)(void *);
+AppTimer *app_timer_register(uint32_t,AppTimerCallback,void *);
+bool app_timer_cancel(AppTimer *);
+typedef struct {
+  uint8_t steps,orientation;
+  uint16_t vmc;
+  bool is_invalid;
+  uint8_t light,padding,heart_rate_bpm,reserved;
+} HealthMinuteData;
+uint32_t health_service_get_minute_history(HealthMinuteData *,uint32_t,time_t *,time_t *);
 typedef void *GFont;
 typedef uint8_t GColor;
 typedef int GTextAlignment;

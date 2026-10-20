@@ -585,29 +585,18 @@ static int bpm_x(int bpm) {
   return lab_clamp((bpm - BPM_AXIS_LO) * 200 / (BPM_AXIS_HI - BPM_AXIS_LO), 0, 200);
 }
 
-// Today's heart range: the red plane's edges are real grid lines placed at the
-// lowest and highest bpm on a fixed 30-200 axis.
+// Today's recorded minute HR range on a fixed 20-220 axis. An asterisk means
+// history is loading/incomplete; hourly averages must never stand in for extrema.
 static void detail_heart(GContext *ctx, const LabData *d) {
   GRect c = D_HEART;
   int lo = d->hr_min;
   int hi = d->hr_max;
-  if (lo <= 0 || hi <= 0) {
-    // Fall back to the hourly averages.
-    lo = 0;
-    hi = 0;
-    for (int h = 0; h < 24; h++) {
-      int v = d->hr_by_hour[h];
-      if (v > 0) {
-        lo = (lo == 0 || v < lo) ? v : lo;
-        hi = v > hi ? v : hi;
-      }
-    }
-  }
+  const char *label=d->hr_range_partial ? "BPM*" : "BPM";
   int top = c.origin.y;
   int bottom = top + c.size.h;
   const int vh = s_face[FACE_L20].h;
   if (lo <= 0 || hi <= 0) {
-    cell_label(ctx, c, "BPM", GColorBlack);
+    cell_label(ctx, c, label, GColorBlack);
     cell_value(ctx, c, "--", FACE_L20, GColorBlack);
     return;
   }
@@ -640,7 +629,7 @@ static void detail_heart(GContext *ctx, const LabData *d) {
   int vy = bottom - PAD - vh;
   if (wl + wh + 2 * PAD + 8 <= xb - xa) {
     // Both ends inside the red plane, at its edges.
-    ink_text(ctx, "BPM", caption(), xa + PAD, top + PAD, GColorWhite);
+    ink_text(ctx, label, caption(), xa + PAD, top + PAD, GColorWhite);
     ink_text(ctx, lo_s, FACE_L20, xa + PAD, vy, GColorWhite);
     ink_text(ctx, hi_s, FACE_L20, xb - PAD - wh, vy, GColorWhite);
   } else {
@@ -651,12 +640,12 @@ static void detail_heart(GContext *ctx, const LabData *d) {
     int room=left>right ? left : right;
     int x=right>=left ? xb+LW+PAD : PAD;
     if(ink_w(range,FACE_L20)+2*PAD<=room) {
-      ink_text(ctx,"BPM",caption(),x,top+PAD,GColorBlack);
+      ink_text(ctx,label,caption(),x,top+PAD,GColorBlack);
       ink_text(ctx,range,FACE_L20,x,vy,GColorBlack);
     } else {
       // A middle-sized range can fit neither combined label; put its endpoints
       // in the two surrounding white planes instead of crossing black rules.
-      ink_text(ctx,"BPM",caption(),xa+PAD,top+PAD,GColorWhite);
+      ink_text(ctx,label,caption(),xa+PAD,top+PAD,GColorWhite);
       ink_text(ctx,lo_s,FACE_L20,PAD,vy,GColorBlack);
       ink_text(ctx,hi_s,FACE_L20,xb+LW+PAD,vy,GColorBlack);
     }
