@@ -18,7 +18,8 @@ UV/date/NZ and tap-view captions while retaining the original grid.
 Requires Pebble SDK 4.33.1 or later and pebble-tool 5.0.40 or later.
 
 ```sh
-npm install
+git submodule update --init shared-kit
+npm ci
 pebble build
 pebble install --emulator emery
 # With the phone/dev connection configured:
@@ -28,6 +29,32 @@ pebble install --cloudpebble
 Output: `build/pebble-mondrian.pbw`. Normal builds use live data. A fixed screenshot
 build is `LAB_SCENARIO=0 pebble build` (1 stress, 2 empty); rebuild without that
 variable before device installation.
+
+
+## Shared kit development and release builds
+
+Read [AGENTS.md](AGENTS.md) before changes: shared behaviour belongs in
+`shared-kit`; design/artwork and per-face options belong here. The kit's tests
+and implementation have one source. `src/c/kit`, `src/pkjs/kit`, `src/c/lab.h`
+and `src/c/lab_common.c` are links into the submodule. Each app retains its
+existing phone storage namespace, UUID, settings and persistence format.
+Signal Deck is not a kit consumer.
+
+```sh
+npm test                         # shared suite plus this face's checks
+npm run release                  # automatically fetch latest kit main, test and clean-build live
+npm run release -- --render       # additionally run the full scene coverage
+npm run release -- --pinned       # use current kit without network access
+npm run kit:update               # fetch the kit without building
+```
+
+`pebble build` stays offline with respect to the kit and supports unfinished kit
+edits. Release builds refuse unfinished/unpublished kit work or a failed fetch.
+The PBW and `build/<watchface>.provenance.json` record the result and exact kit
+revision; the receipt also contains the PBW SHA-256. These commands do not
+publish to the Pebble store. Commit the updated submodule revision with an app
+release. For a historical rebuild, check out that app revision, run
+`git submodule update --init shared-kit`, then use the pinned command.
 
 ## Usage and settings
 
@@ -139,9 +166,10 @@ actual battery drain before choosing a different default.
 
 ## Kit and release files
 
-The reusable kit is documented at `src/c/kit/KIT.md`, version 1.2. It preserves
-the lab contracts and includes watch/phone modules, validated weather caching,
-health and Clay settings. Later faces copy this source; they share no runtime.
+The reusable kit is now [pebble-watchface-kit](https://github.com/LiamCordelle/pebble-watchface-kit),
+version 2.0.0, included through the `shared-kit` Git submodule. It preserves the
+lab contracts and shares watch/phone modules, tests, health, weather and settings
+with Underground. See [kit documentation](shared-kit/README.md).
 
 Store screenshots: `store/emery_face.png`, `store/emery_detail.png`. QEMU evidence:
 `shots/emulator-*.png`, `shots/emulator.log`, `shots/emulator-data.log`.

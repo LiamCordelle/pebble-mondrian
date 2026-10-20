@@ -2,7 +2,7 @@
 """Run with pebble-tool's Python. Check QEMU and always stop it afterwards.
 
 QEMU does not establish physical Time 2 history retention. Deterministic history
-fixtures, gaps, older records and DST are tested in tests/history.test.c.
+fixtures, gaps, older records and DST are tested in shared-kit/tests/history.test.c.
 """
 from pathlib import Path
 import os

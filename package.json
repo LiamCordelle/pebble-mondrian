@@ -106,5 +106,12 @@
         }
       ]
     }
+  },
+  "scripts": {
+    "test": "python3 tests/run.py",
+    "build": "pebble build",
+    "render": "python3 tools/render_scenes.py",
+    "release": "python3 tools/release.py",
+    "kit:update": "python3 tools/release.py --update-only"
   }
 }
