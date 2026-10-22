@@ -1,4 +1,5 @@
 #include "lab.h"
+#include "kit/kit_calc.h"
 #include "kit/kit_core.h"
 
 // Mondrian: a De Stijl composition where every rectangle is a metric.
@@ -58,7 +59,7 @@ static Face s_face[6];
 static bool s_large_labels;
 static FaceId caption(void) { return s_large_labels ? FACE_G14 : FACE_PX8; }
 static int display_temp(const LabData *d, int c) {
-  return d->temp_fahrenheit ? (c * 9 + (c >= 0 ? 2 : -2)) / 5 + 32 : c;
+  return kit_temperature(c,d->temp_fahrenheit);
 }
 
 static void load(void) {
@@ -347,10 +348,10 @@ static void draw_weather(GContext *ctx, const LabData *d) {
 // black plane after sunset, white when the sun times are unknown.
 static void draw_sun(GContext *ctx, const LabData *d) {
   GRect c = R_SUN;
-  bool day = d->weather_ok && d->minute_of_day >= d->sunrise_min &&
-             d->minute_of_day < d->sunset_min;
+  KitDaylight light=kit_daylight_state(d->weather_ok,d->minute_of_day,d->sunrise_min,d->sunset_min);
+  bool day=light==KitDaylightDay;
   GColor ink = GColorBlack;
-  if (d->weather_ok) {
+  if (light!=KitDaylightUnknown) {
     fill(ctx, c, day ? COL_YELLOW : GColorBlack);
     ink = day ? GColorBlack : GColorWhite;
   }
@@ -518,18 +519,10 @@ static void detail_time(GContext *ctx, const LabData *d) {
 // rain is likely (50% or more), like the face's sun cell turns with the day.
 static void detail_rain(GContext *ctx, const LabData *d) {
   GRect c = D_RAIN;
-  int peak = -1;
-  int peak_hour = 0;
-  int peak_day = 0;
-  if (d->weather_ok) {
-    for (int i = 0; i < d->rolling_count; i++) {
-      if (d->rolling_rain[i] > peak) {
-        peak = d->rolling_rain[i];
-        peak_hour = d->rolling_hour[i];
-        peak_day = d->rolling_day[i];
-      }
-    }
-  }
+  int index=d->weather_ok ? kit_forecast_rain_peak(d->rolling_rain,d->rolling_count,0,0) : -1;
+  int peak=index<0 ? -1 : d->rolling_rain[index];
+  int peak_hour=index<0 ? 0 : d->rolling_hour[index];
+  int peak_day=index<0 ? 0 : d->rolling_day[index];
   char lab[16];
   char when[8];
   if (peak < 0) {

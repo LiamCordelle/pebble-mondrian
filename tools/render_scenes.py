@@ -32,6 +32,7 @@ scenes=[('demo',0,False,{}),('stress',1,False,{}),('empty',2,False,{}),
         ('partial-no-range',0,True,{'NO_RANGE':1,'HR_PARTIAL':1}),
         ('heart-220',0,False,{'HR':220}),('step-sliver',0,False,{'STEPS':100}),
         ('near-goal',0,False,{'STEPS':9870})]
+scenes.append(('unknown-daylight',0,False,{'NO_SUN':1}))
 for name,code in [('sun',0),('partly',2),('cloud',3),('rain',63),('snow',73),('storm',95),('fog',45)]:
     scenes.append(('weather-'+name,0,False,{'WEATHER_CODE':code}))
 def render(scene):
@@ -50,6 +51,7 @@ for name in ['demo','detail','large-labels','large-detail']:
 reference=Image.open(LAB/'designs/05-mondrian/shots/demo.png').convert('RGB')
 actual=Image.open(SHOTS/'demo.png').convert('RGB')
 assert ImageChops.difference(reference,actual).getbbox() is None,'Default art changed from original'
+assert Image.open(SHOTS/'unknown-daylight.png').convert('RGB').getpixel((74,195))==(255,255,255), 'Unknown daylight must retain a neutral sun cell'
 cols=6;rows=(len(scenes)+cols-1)//cols
 sheet=Image.new('RGB',(cols*216,rows*254),'#dedede');draw=ImageDraw.Draw(sheet)
 for i,(name,*_) in enumerate(scenes):

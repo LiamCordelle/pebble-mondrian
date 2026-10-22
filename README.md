@@ -206,3 +206,11 @@ and QEMU stopped. See `shots/history-*`. Publishing metadata and downloaded
 artifact verification are recorded in `store/published.json`.
 
 Release 1.0.7: built with the shared kit 2.0.0; artwork and settings are preserved.
+
+## Shared behaviour maintenance
+
+This release uses kit 2.2.0 for shared data and calculations.
+Artwork and explicit render fixtures remain face-owned. Run
+`tools/emulator_smoke.py` with pebble-tool's Python for common runtime checks;
+local emulator/visual checkers retain the face-specific assertions.
+The published 8,000-step-default release is recorded in store/published.json.

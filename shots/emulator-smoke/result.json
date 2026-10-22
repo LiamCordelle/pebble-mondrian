@@ -1,0 +1,97 @@
+{
+  "uuid": "3bd45600-4ca0-49b6-8129-f840caaf0201",
+  "fresh_default_goal": 8000,
+  "saved_goal_after_restart": 12500,
+  "synthetic_weather": true,
+  "weather_reply_count": 1,
+  "report": {
+    "frames": [
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 1005
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 11
+      },
+      {
+        "view": "face",
+        "wall_ms": 1008
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 7
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 11
+      },
+      {
+        "view": "detail",
+        "wall_ms": 5
+      },
+      {
+        "view": "face",
+        "wall_ms": 12
+      }
+    ],
+    "clock_discontinuity_candidates": [],
+    "faults": [],
+    "starts": [
+      "2.2.0",
+      "2.2.0",
+      "2.2.0"
+    ],
+    "exits": [
+      {
+        "app": "Mondrian",
+        "allocated_bytes": 0
+      },
+      {
+        "app": "Mondrian",
+        "allocated_bytes": 0
+      },
+      {
+        "app": "Mondrian",
+        "allocated_bytes": 0
+      }
+    ],
+    "weather_acceptances": 1
+  }
+}
