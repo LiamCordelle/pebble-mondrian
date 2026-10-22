@@ -1,4 +1,5 @@
 #include "lab.h"
+#include "kit/kit_core.h"
 
 // Mondrian: a De Stijl composition where every rectangle is a metric.
 //
@@ -412,7 +413,7 @@ static void draw_battery(GContext *ctx, const LabData *d) {
 
 static void draw_steps(GContext *ctx, const LabData *d) {
   GRect c = R_STEPS;
-  int32_t goal = d->step_goal > 0 ? d->step_goal : 10000;
+  int32_t goal = d->step_goal > 0 ? d->step_goal : KIT_DEFAULT_STEP_GOAL;
   int permille = d->steps_ok ? (int)((d->steps * 1000) / goal) : 0;
   bool divider;
   int h = split_len(c.size.h, permille, &divider);
@@ -657,7 +658,7 @@ static void detail_heart(GContext *ctx, const LabData *d) {
 static void detail_week(GContext *ctx, const LabData *d) {
   static const char LETTERS[] = "SMTWTFS";
   GRect c = D_WEEK;
-  int32_t goal = d->step_goal > 0 ? d->step_goal : 10000;
+  int32_t goal = d->step_goal > 0 ? d->step_goal : KIT_DEFAULT_STEP_GOAL;
   const int inner = c.size.w - 6 * LW;
   int bottom = c.origin.y + c.size.h;
   for (int i = 0; i < 7; i++) {

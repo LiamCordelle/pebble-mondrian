@@ -62,7 +62,7 @@ Tap the screen or flick your wrist to show detail for eight seconds. Tap/flick
 again to return immediately. Health updates and time ticks are limited to minute
 boundaries. There are no animations or second ticks.
 
-Clay settings: watch/12/24-hour format, Celsius/Fahrenheit, step goal (10,000 by
+Clay settings: watch/12/24-hour format, Celsius/Fahrenheit, step goal (8,000 by
 default), second time zone (NZ, UTC, LON, NYC, LA, TKY, SYD), weather, optional
 health demo fallback and larger labels. Settings apply live and persist.
 Normal health data is never replaced by demo values unless fallback is enabled.
