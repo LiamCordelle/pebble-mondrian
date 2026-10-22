@@ -1,43 +1,133 @@
 {
-  "version": "1.0.8",
+  "version": "1.0.9",
   "app_id": "ffa303a745844dac899c65b4",
   "store_url": "https://apps.repebble.com/ffa303a745844dac899c65b4",
   "uuid": "3bd45600-4ca0-49b6-8129-f840caaf0201",
   "visible": true,
   "is_published": true,
   "has_pbw": true,
-  "published_date": "2026-10-22T21:03:01.23",
-  "release_notes": "New installations now default to an 8,000-step daily goal. Existing saved step goals are preserved. Includes the latest shared watchface kit.",
+  "published_date": "2026-10-22T21:26:28.162",
+  "release_notes": "Consistent temperature rounding and handling of unavailable sun times. Shared time, forecast and activity helpers improve consistency across watchfaces. New installations default to an 8,000-step goal; existing saved goals are preserved.",
   "gallery_counts": {
     "emery": 2
   },
   "screenshots_unchanged": true,
-  "kit_version": "2.1.2",
-  "kit_revision": "71a935de2c9554d8fa29570ceece633b7bd0214a",
-  "source_revision": "d3642f16126f9c4e86c58191a25f0819968a46e4",
-  "local_pbw_sha256": "c4fa8eaacf6557971f9eea22769654460b649a2eb87a04d92d3cd0df418af160",
+  "kit_version": "2.2.0",
+  "kit_revision": "c737afcfadf8cdd62dec58941cf8718fed0d6017",
+  "source_revision": "08c849a7eb601dc36d748ecf6f4cd4aeac2c63f1",
+  "local_pbw_sha256": "ba7ad792499de5553d5ad3930918870576d947b37512116d10a78b72152b7b3f",
   "release_build_provenance": {
-    "created_utc": "2026-10-22T21:01:52.408419+00:00",
+    "created_utc": "2026-10-22T21:25:09.741159+00:00",
     "app": "pebble-mondrian",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "uuid": "3bd45600-4ca0-49b6-8129-f840caaf0201",
-    "app_revision": "d3642f16126f9c4e86c58191a25f0819968a46e4",
+    "app_revision": "08c849a7eb601dc36d748ecf6f4cd4aeac2c63f1",
     "app_modified": false,
-    "kit_version": "2.1.2",
-    "kit_revision": "71a935de2c9554d8fa29570ceece633b7bd0214a",
+    "kit_version": "2.2.0",
+    "kit_revision": "c737afcfadf8cdd62dec58941cf8718fed0d6017",
     "kit_repository": "https://github.com/LiamCordelle/pebble-watchface-kit.git",
-    "pbw_sha256": "c4fa8eaacf6557971f9eea22769654460b649a2eb87a04d92d3cd0df418af160",
+    "pbw_sha256": "ba7ad792499de5553d5ad3930918870576d947b37512116d10a78b72152b7b3f",
     "scenario": 3,
     "touch_window_ms": 0,
     "tests_passed": true,
     "renders_checked": true
   },
   "runtime_default_verification": {
-    "app": "pebble-mondrian",
     "uuid": "3bd45600-4ca0-49b6-8129-f840caaf0201",
-    "fresh_default": 8000,
-    "persisted_goal_verified": 12500,
-    "no_faults": true
+    "fresh_default_goal": 8000,
+    "saved_goal_after_restart": 12500,
+    "synthetic_weather": true,
+    "weather_reply_count": 1,
+    "report": {
+      "frames": [
+        {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 2
+        },
+        {
+          "view": "face",
+          "wall_ms": 2
+        },
+        {
+          "view": "face",
+          "wall_ms": 2
+        },
+        {
+          "view": "face",
+          "wall_ms": 2
+        },
+        {
+          "view": "face",
+          "wall_ms": 1005
+        },
+        {
+          "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 11
+        },
+        {
+          "view": "face",
+          "wall_ms": 1008
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 7
+        },
+        {
+          "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 11
+        },
+        {
+          "view": "detail",
+          "wall_ms": 5
+        },
+        {
+          "view": "face",
+          "wall_ms": 12
+        }
+      ],
+      "clock_discontinuity_candidates": [],
+      "faults": [],
+      "starts": [
+        "2.2.0",
+        "2.2.0",
+        "2.2.0"
+      ],
+      "exits": [
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        }
+      ],
+      "weather_acceptances": 1
+    }
   },
   "verification": "Authenticated store record confirms the expected existing app, visible published version, PBW and retained gallery. Local release hash is unchanged after the publish build."
 }
