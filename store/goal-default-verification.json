@@ -1,0 +1,7 @@
+{
+  "app": "pebble-mondrian",
+  "uuid": "3bd45600-4ca0-49b6-8129-f840caaf0201",
+  "fresh_default": 8000,
+  "persisted_goal_verified": 12500,
+  "no_faults": true
+}
