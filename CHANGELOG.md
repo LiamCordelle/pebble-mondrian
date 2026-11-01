@@ -2,12 +2,14 @@
 
 ## 1.1.0 — 1 November 2026
 
-- Expand the second-timezone picker to all 597 IANA identifiers and aliases,
+- Add a searchable second-timezone picker for all 597 IANA identifiers and aliases,
   including Mumbai, Abu Dhabi and Moscow. The main and flick clocks show the
   selected location with automatic offline daylight-saving transitions.
 - Include half-hour and quarter-hour offsets. Keep existing timezone selections,
   saved step goals and message keys intact.
-- Use shared kit 2.4.0 with bundled IANA tzdata 2026f.
+- Start with common choices; search by city, region or IANA name, then select
+  a match. Preserve the selected timezone while filtering or clearing search.
+- Use shared kit 2.4.1 with bundled IANA tzdata 2026f.
 
 ## 1.0.10 — 1 November 2026
 

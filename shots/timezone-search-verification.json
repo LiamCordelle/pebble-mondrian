@@ -1,0 +1,41 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "clay_version": "1.0.10",
+  "checks": [
+    "Common seven plus current selected zone on reopen",
+    "Mumbai case-insensitive live filter",
+    "Asia/Kolkata IANA-name filter",
+    "Selecting Abu Dhabi then clearing search",
+    "No matches retains selected zone",
+    "Enter does not submit the form",
+    "Save with Moscow query retains explicitly chosen Abu Dhabi WORLD 268",
+    "Search/status absent from serialized settings"
+  ],
+  "save_payload": {
+    "TIME_MODE": {
+      "value": "0"
+    },
+    "TEMP_UNIT": {
+      "value": "0"
+    },
+    "LARGE_LABELS": {
+      "value": false
+    },
+    "WORLD": {
+      "value": "268"
+    },
+    "STEP_GOAL": {
+      "value": 8000
+    },
+    "WEATHER_ENABLED": {
+      "value": true
+    },
+    "DEMO_FALLBACK": {
+      "value": false
+    }
+  },
+  "screenshot": "timezone-search-mobile.jpg"
+}

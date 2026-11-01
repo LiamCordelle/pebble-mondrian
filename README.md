@@ -178,7 +178,7 @@ actual battery drain before choosing a different default.
 ## Kit and release files
 
 The reusable kit is now [pebble-watchface-kit](https://github.com/LiamCordelle/pebble-watchface-kit),
-version 2.4.0, included through the `shared-kit` Git submodule. It preserves the
+version 2.4.1, included through the `shared-kit` Git submodule. It preserves the
 lab contracts and shares watch/phone modules, tests, health, weather and settings
 with Underground. See [kit documentation](shared-kit/README.md).
 
@@ -220,7 +220,7 @@ Release 1.0.7: built with the shared kit 2.0.0; artwork and settings are preserv
 
 ## Shared behaviour maintenance
 
-This release uses kit 2.4.0 for shared data and calculations.
+This release uses kit 2.4.1 for shared data and calculations.
 Artwork and explicit render fixtures remain face-owned. Run
 `tools/emulator_smoke.py` with pebble-tool's Python for common runtime checks;
 local emulator/visual checkers retain the face-specific assertions.
@@ -246,11 +246,19 @@ QEMU stopped after each session.
 
 ## 1.1.0 timezone support
 
-The second-timezone picker includes all 597 identifiers and aliases in IANA
+The searchable second-timezone picker includes all 597 identifiers and aliases in IANA
 tzdata 2026f. Choose Mumbai / Kolkata (India), Abu Dhabi / Dubai (UAE), or
 Europe / Moscow for the three requested locations. Both secondary clocks use the selected zone.
 Half-hour and quarter-hour offsets and daylight-saving changes work offline.
 Original selections and saved step goals survive the upgrade.
+
+Open Display → Find a time zone and type a city, region or IANA name. The
+Second time zone menu narrows to matching results; choose one and Save settings.
+With an empty search it shows the seven common choices plus the current zone.
+Typing, clearing or getting no matches never silently changes the selection.
+Search text is temporary and is excluded from saved settings.
+See [the phone-width search preview](shots/timezone-search-mobile.jpg).
+
 
 The bundled rules cover 2020 through January 2038, the watch's signed 32-bit
 time limit. Rule changes are delivered by watchface updates. The shared kit
@@ -258,7 +266,7 @@ owns timezone data, calculations, persistence and tests; Mondrian owns the
 picker opt-in, compact labels' placement and screenshot scenarios.
 
 1.1.0 release dependency: kit 2.3.0 `61eb1abee64bd57029be23d6c753336b72768f18`
-to 2.4.0 `f8b2486e0f2f7d0f67fee9d90775fe34a4bfdbd6`. The original kit and
+to 2.4.1 `2dcfa7302bf07aabb9a1f5f0974064b638dd5ac8`. The original kit and
 consumer worktrees were clean; fetching origin/main confirmed 2.3.0 was current.
 The tested kit is shared on remote main. The live release is built with
 `npm run release -- --render`, recording the source, kit revision and artifact

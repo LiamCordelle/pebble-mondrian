@@ -1,1 +1,1 @@
-Choose from all 597 IANA timezone identifiers, including Mumbai, Abu Dhabi and Moscow. Automatic daylight saving and half-hour/quarter-hour offsets work offline on the watch. Existing timezone selections and saved settings are preserved.
+Search all 597 IANA timezone identifiers by city, region or timezone name, including Mumbai, Abu Dhabi and Moscow. Common choices are shown first. Automatic daylight saving and half-hour/quarter-hour offsets work offline on the watch. Existing timezone selections and saved settings are preserved.
