@@ -227,12 +227,12 @@ The published 8,000-step-default release is recorded in store/published.json.
 
 ## 1.0.10 verification
 
-Candidate dependency: kit 2.2.0 `c737afcfadf8cdd62dec58941cf8718fed0d6017`
+Release dependency: kit 2.2.0 `c737afcfadf8cdd62dec58941cf8718fed0d6017`
 to 2.3.0 `61eb1abee64bd57029be23d6c753336b72768f18`. Both original worktrees
 were clean; fetching `origin/main` confirmed the original SHA was current.
-The new kit commit is tested locally but awaits permission to push to remote
-main. `npm run release -- --render` correctly refuses the unpublished commit;
-the current PBW is an ordinary development build, not a completed release.
+The tested kit commit is shared on remote main. The release is built with
+`npm run release -- --render`, which records its exact source and kit revisions
+and PBW checksum in the build provenance.
 
 Shared regression tests and 76 Mondrian render scenes pass. The main default
 composition remains pixel-identical to the original proposal. Goal fills are
