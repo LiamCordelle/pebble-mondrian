@@ -1,68 +1,57 @@
 {
-  "version": "1.0.9",
+  "version": "1.0.10",
   "app_id": "ffa303a745844dac899c65b4",
   "store_url": "https://apps.repebble.com/ffa303a745844dac899c65b4",
   "uuid": "3bd45600-4ca0-49b6-8129-f840caaf0201",
   "visible": true,
   "is_published": true,
   "has_pbw": true,
-  "published_date": "2026-10-22T21:26:28.162",
-  "release_notes": "Consistent temperature rounding and handling of unavailable sun times. Shared time, forecast and activity helpers improve consistency across watchfaces. New installations default to an 8,000-step goal; existing saved goals are preserved.",
+  "published_date": "2026-11-01T17:49:28.687",
+  "release_notes": "The flick-view clock now shows your chosen second timezone. After reaching your step goal, the step box keeps filling: yellow over blue to 200%, green over yellow to 300%, then the palette repeats for further goals. Existing settings are preserved.",
   "gallery_counts": {
     "emery": 2
   },
-  "screenshots_unchanged": true,
-  "kit_version": "2.2.0",
-  "kit_revision": "c737afcfadf8cdd62dec58941cf8718fed0d6017",
-  "source_revision": "08c849a7eb601dc36d748ecf6f4cd4aeac2c63f1",
-  "local_pbw_sha256": "ba7ad792499de5553d5ad3930918870576d947b37512116d10a78b72152b7b3f",
+  "screenshots_unchanged": false,
+  "kit_version": "2.3.0",
+  "kit_revision": "61eb1abee64bd57029be23d6c753336b72768f18",
+  "source_revision": "3e24b27c01389df4008ac72c94657863c3eb7c06",
+  "local_pbw_sha256": "369dad2f9fcef3cdf43f85be47b206e1d1504c1a412cf100849b1e962f871c9a",
   "release_build_provenance": {
-    "created_utc": "2026-10-22T21:25:09.741159+00:00",
+    "created_utc": "2026-11-01T17:47:48.133882+00:00",
     "app": "pebble-mondrian",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "uuid": "3bd45600-4ca0-49b6-8129-f840caaf0201",
-    "app_revision": "08c849a7eb601dc36d748ecf6f4cd4aeac2c63f1",
+    "app_revision": "3e24b27c01389df4008ac72c94657863c3eb7c06",
     "app_modified": false,
-    "kit_version": "2.2.0",
-    "kit_revision": "c737afcfadf8cdd62dec58941cf8718fed0d6017",
+    "kit_version": "2.3.0",
+    "kit_revision": "61eb1abee64bd57029be23d6c753336b72768f18",
     "kit_repository": "https://github.com/LiamCordelle/pebble-watchface-kit.git",
-    "pbw_sha256": "ba7ad792499de5553d5ad3930918870576d947b37512116d10a78b72152b7b3f",
+    "pbw_sha256": "369dad2f9fcef3cdf43f85be47b206e1d1504c1a412cf100849b1e962f871c9a",
     "scenario": 3,
     "touch_window_ms": 0,
     "tests_passed": true,
     "renders_checked": true
   },
-  "runtime_default_verification": {
-    "uuid": "3bd45600-4ca0-49b6-8129-f840caaf0201",
-    "fresh_default_goal": 8000,
-    "saved_goal_after_restart": 12500,
-    "synthetic_weather": true,
-    "weather_reply_count": 1,
+  "runtime_improvement_verification": {
+    "goal_percentages": [
+      100,
+      150,
+      200,
+      250,
+      300,
+      350
+    ],
+    "clock_pixel_checks": [
+      "Tokyo 24h",
+      "Tokyo 12h",
+      "UTC large"
+    ],
+    "detail_timeout": true,
     "report": {
       "frames": [
         {
           "view": "face",
-          "wall_ms": 6
-        },
-        {
-          "view": "face",
-          "wall_ms": 2
-        },
-        {
-          "view": "face",
-          "wall_ms": 2
-        },
-        {
-          "view": "face",
-          "wall_ms": 2
-        },
-        {
-          "view": "face",
-          "wall_ms": 2
-        },
-        {
-          "view": "face",
-          "wall_ms": 1005
+          "wall_ms": 7
         },
         {
           "view": "face",
@@ -70,11 +59,43 @@
         },
         {
           "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 12
+        },
+        {
+          "view": "face",
+          "wall_ms": 5
+        },
+        {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 5
+        },
+        {
+          "view": "face",
           "wall_ms": 11
         },
         {
           "view": "face",
-          "wall_ms": 1008
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 13
+        },
+        {
+          "view": "face",
+          "wall_ms": 7
         },
         {
           "view": "face",
@@ -83,6 +104,18 @@
         {
           "view": "face",
           "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 5
+        },
+        {
+          "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 12
         },
         {
           "view": "face",
@@ -97,22 +130,129 @@
           "wall_ms": 11
         },
         {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 10
+        },
+        {
+          "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 12
+        },
+        {
+          "view": "detail",
+          "wall_ms": 7
+        },
+        {
+          "view": "detail",
+          "wall_ms": 2
+        },
+        {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "detail",
+          "wall_ms": 10
+        },
+        {
+          "view": "detail",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 9
+        },
+        {
+          "view": "detail",
+          "wall_ms": 7
+        },
+        {
           "view": "detail",
           "wall_ms": 5
         },
         {
           "view": "face",
-          "wall_ms": 12
+          "wall_ms": 11
         }
       ],
       "clock_discontinuity_candidates": [],
       "faults": [],
       "starts": [
-        "2.2.0",
-        "2.2.0",
-        "2.2.0"
+        "2.3.0",
+        "2.3.0",
+        "2.3.0",
+        "2.3.0",
+        "2.3.0",
+        "2.3.0",
+        "2.3.0",
+        "2.3.0",
+        "2.3.0",
+        "2.3.0"
       ],
       "exits": [
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
         {
           "app": "Mondrian",
           "allocated_bytes": 0
@@ -129,5 +269,5 @@
       "weather_acceptances": 1
     }
   },
-  "verification": "Authenticated store record confirms the expected existing app, visible published version, PBW and retained gallery. Local release hash is unchanged after the publish build."
+  "verification": "Authenticated store record confirms the existing app, visible published 1.0.10, PBW and two refreshed Emery screenshots. Publish build hash matches the tested release artifact."
 }

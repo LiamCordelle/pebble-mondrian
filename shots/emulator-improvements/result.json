@@ -21,7 +21,7 @@
       },
       {
         "view": "face",
-        "wall_ms": 2
+        "wall_ms": 3
       },
       {
         "view": "face",
@@ -29,7 +29,7 @@
       },
       {
         "view": "face",
-        "wall_ms": 11
+        "wall_ms": 12
       },
       {
         "view": "face",
@@ -41,15 +41,39 @@
       },
       {
         "view": "face",
-        "wall_ms": 4
+        "wall_ms": 5
       },
       {
         "view": "face",
-        "wall_ms": 10
+        "wall_ms": 11
       },
       {
         "view": "face",
         "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 13
+      },
+      {
+        "view": "face",
+        "wall_ms": 7
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 5
       },
       {
         "view": "face",
@@ -65,35 +89,7 @@
       },
       {
         "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 5
-      },
-      {
-        "view": "face",
-        "wall_ms": 6
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 7
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 6
-      },
-      {
-        "view": "face",
-        "wall_ms": 1003
+        "wall_ms": 3
       },
       {
         "view": "face",
@@ -101,23 +97,7 @@
       },
       {
         "view": "face",
-        "wall_ms": 7
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 11
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 5
+        "wall_ms": 6
       },
       {
         "view": "face",
@@ -125,35 +105,51 @@
       },
       {
         "view": "face",
+        "wall_ms": 10
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 12
+      },
+      {
+        "view": "detail",
+        "wall_ms": 7
+      },
+      {
+        "view": "detail",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "detail",
         "wall_ms": 10
       },
       {
         "view": "detail",
-        "wall_ms": 7
-      },
-      {
-        "view": "detail",
-        "wall_ms": 2
-      },
-      {
-        "view": "face",
-        "wall_ms": 6
-      },
-      {
-        "view": "face",
         "wall_ms": 3
-      },
-      {
-        "view": "face",
-        "wall_ms": 8
-      },
-      {
-        "view": "detail",
-        "wall_ms": 8
-      },
-      {
-        "view": "detail",
-        "wall_ms": 2
       },
       {
         "view": "face",
@@ -165,15 +161,19 @@
       },
       {
         "view": "face",
-        "wall_ms": 11
+        "wall_ms": 9
       },
       {
         "view": "detail",
-        "wall_ms": 6
+        "wall_ms": 7
+      },
+      {
+        "view": "detail",
+        "wall_ms": 5
       },
       {
         "view": "face",
-        "wall_ms": 9
+        "wall_ms": 11
       }
     ],
     "clock_discontinuity_candidates": [],
