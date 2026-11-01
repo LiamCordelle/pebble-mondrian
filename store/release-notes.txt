@@ -1,1 +1,1 @@
-The flick-view clock now shows your chosen second timezone. After reaching your step goal, the step box keeps filling: red over blue to 200%, yellow over red to 300%, then the palette repeats for further goals. Existing settings are preserved.
+The flick-view clock now shows your chosen second timezone. After reaching your step goal, the step box keeps filling: yellow over blue to 200%, green over yellow to 300%, then the palette repeats for further goals. Existing settings are preserved.

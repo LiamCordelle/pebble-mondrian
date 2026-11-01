@@ -3,7 +3,7 @@
 ## 1.0.10 — 1 November 2026
 
 - Show the configured second timezone and its label in the flick-view clock.
-- Fill the step counter blue to 100%, red over blue to 200%, yellow over red
+- Fill the step counter blue to 100%, yellow over blue to 200%, green over yellow
   to 300%, then repeat the palette for further goals. Keep text readable on
   each colour, and retain the total percentage in compact captions.
 - Use shared kit 2.3.0 for overflow-safe repeated-goal progress. Existing saved

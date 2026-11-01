@@ -65,9 +65,9 @@ boundaries. There are no animations or second ticks.
 The detail clock shows the configured second timezone, with its label above
 the time. It follows the same 12/24-hour setting as the main clock.
 
-The main step box fills blue up to the goal. After 100%, red rises over the
-completed blue plane until 200%; yellow rises over red until 300%; then the
-blue/red/yellow sequence repeats. At exact goal multiples the box stays fully
+The main step box fills blue up to the goal. After 100%, yellow rises over the
+completed blue plane until 200%; green rises over yellow until 300%; then the
+blue/yellow/green sequence repeats. At exact goal multiples the box stays fully
 in the completed colour; the next step starts the next fill. Compact captions
 show the total percentage. The weekly detail chart keeps its existing colours
 and full-height goal marker.

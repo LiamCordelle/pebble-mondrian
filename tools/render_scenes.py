@@ -64,11 +64,11 @@ assert Image.open(SHOTS/'unknown-daylight.png').convert('RGB').getpixel((74,195)
 # The Lab renderer applies its display palette; sample the existing planes.
 white=actual.getpixel((194,10))
 blue=actual.getpixel((194,225))
-red=actual.getpixel((194,60))
 yellow=actual.getpixel((74,195))
+green=(142,227,145)  # SDK LCD correction of GColorGreen (00ff00).
 for pct,top,bottom in [(0,white,white),(50,white,blue),(100,blue,blue),
-                       (150,blue,red),(200,red,red),(250,red,yellow),
-                       (300,yellow,yellow),(350,yellow,blue),(400,blue,blue)]:
+                       (150,blue,yellow),(200,yellow,yellow),(250,yellow,green),
+                       (300,green,green),(350,green,blue),(400,blue,blue)]:
     for suffix in ['', '-large']:
         image=Image.open(SHOTS/f'goal-{pct}{suffix}.png').convert('RGB')
         assert image.getpixel((194,111))==top,(pct,suffix,'previous colour')

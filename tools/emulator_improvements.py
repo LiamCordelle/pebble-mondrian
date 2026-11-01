@@ -52,7 +52,8 @@ with EmulatorSession(ROOT, ROOT/'shots/emulator-improvements') as emu:
     # each frame uses a fresh model without waiting for a minute tick.
     reference = Image.open(ROOT/'shots/demo.png').convert('RGB')
     palette = [reference.getpixel(point) for point in
-               [(194,10), (194,225), (194,60), (74,195)]]
+               [(194,10), (194,225), (74,195)]]
+    palette.append((142,227,145))  # SDK LCD correction of GColorGreen.
     emu.apply_clay(common_settings(8000))
     for pct, top, bottom in [(100,1,1), (150,1,2), (200,2,2),
                               (250,2,3), (300,3,3), (350,3,1)]:

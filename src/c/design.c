@@ -6,7 +6,7 @@
 //
 // The grid lines are 6 px, the stem width of LECO 42, so the clock is built
 // from the same black bars as the painting. Two lines are driven by data:
-//   - steps: blue rises to the goal, then red/yellow/blue rise over the previous
+//   - steps: blue rises to the goal, then yellow/green/blue rise over the previous
 //     colour for each further goal interval.
 //   - battery: the grey plane in the bottom-left corner shrinks with charge
 //     (red below 10%).
@@ -18,6 +18,7 @@
 #define COL_RED GColorFromHEX(0xff0000)
 #define COL_BLUE GColorFromHEX(0x0000ff)
 #define COL_YELLOW GColorFromHEX(0xffff00)
+#define COL_GREEN GColorFromHEX(0x00ff00)
 #define COL_GREY GColorFromHEX(0xaaaaaa)
 
 // --- composition (200 x 228) --------------------------------------------------
@@ -416,11 +417,11 @@ static void draw_steps(GContext *ctx, const LabData *d) {
   GRect c = R_STEPS;
   int32_t goal = d->step_goal > 0 ? d->step_goal : KIT_DEFAULT_STEP_GOAL;
   KitGoalProgress progress = kit_goal_progress(d->steps_ok ? d->steps : 0, goal);
-  const GColor colours[] = {COL_BLUE, COL_RED, COL_YELLOW};
+  const GColor colours[] = {COL_BLUE, COL_YELLOW, COL_GREEN};
   GColor current = colours[progress.cycle % ARRAY_LENGTH(colours)];
   GColor previous = progress.cycle ? colours[(progress.cycle - 1) % ARRAY_LENGTH(colours)] : GColorWhite;
-  GColor current_ink = progress.cycle % 3 == 2 ? GColorBlack : GColorWhite;
-  GColor previous_ink = !progress.cycle || (progress.cycle - 1) % 3 == 2 ? GColorBlack : GColorWhite;
+  GColor current_ink = progress.cycle % 3 == 0 ? GColorWhite : GColorBlack;
+  GColor previous_ink = !progress.cycle || (progress.cycle - 1) % 3 != 0 ? GColorBlack : GColorWhite;
   fill(ctx, c, previous);
   bool divider;
   int h = split_len(c.size.h, progress.permille, &divider);

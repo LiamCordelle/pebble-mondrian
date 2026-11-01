@@ -17,7 +17,7 @@
     "frames": [
       {
         "view": "face",
-        "wall_ms": 6
+        "wall_ms": 7
       },
       {
         "view": "face",
@@ -29,11 +29,35 @@
       },
       {
         "view": "face",
-        "wall_ms": 12
+        "wall_ms": 11
       },
       {
         "view": "face",
-        "wall_ms": 7
+        "wall_ms": 5
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 10
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 12
       },
       {
         "view": "face",
@@ -45,7 +69,51 @@
       },
       {
         "view": "face",
-        "wall_ms": 3
+        "wall_ms": 5
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 7
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 1003
+      },
+      {
+        "view": "face",
+        "wall_ms": 11
+      },
+      {
+        "view": "face",
+        "wall_ms": 7
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 11
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
       },
       {
         "view": "face",
@@ -60,72 +128,8 @@
         "wall_ms": 10
       },
       {
-        "view": "face",
-        "wall_ms": 5
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 5
-      },
-      {
-        "view": "face",
-        "wall_ms": 6
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 13
-      },
-      {
-        "view": "face",
-        "wall_ms": 6
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 12
-      },
-      {
-        "view": "face",
-        "wall_ms": 6
-      },
-      {
-        "view": "face",
-        "wall_ms": 4294966299
-      },
-      {
-        "view": "face",
-        "wall_ms": 5
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 5
-      },
-      {
-        "view": "face",
-        "wall_ms": 3
-      },
-      {
-        "view": "face",
-        "wall_ms": 11
-      },
-      {
         "view": "detail",
-        "wall_ms": 4
+        "wall_ms": 7
       },
       {
         "view": "detail",
@@ -133,7 +137,7 @@
       },
       {
         "view": "face",
-        "wall_ms": 5
+        "wall_ms": 6
       },
       {
         "view": "face",
@@ -141,7 +145,7 @@
       },
       {
         "view": "face",
-        "wall_ms": 11
+        "wall_ms": 8
       },
       {
         "view": "detail",
@@ -161,23 +165,18 @@
       },
       {
         "view": "face",
-        "wall_ms": 10
+        "wall_ms": 11
       },
       {
         "view": "detail",
-        "wall_ms": 10
+        "wall_ms": 6
       },
       {
         "view": "face",
-        "wall_ms": 10
+        "wall_ms": 9
       }
     ],
-    "clock_discontinuity_candidates": [
-      {
-        "view": "face",
-        "wall_ms": 4294966299
-      }
-    ],
+    "clock_discontinuity_candidates": [],
     "faults": [],
     "starts": [
       "2.3.0",
