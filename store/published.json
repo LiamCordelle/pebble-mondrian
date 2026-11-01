@@ -1,36 +1,41 @@
 {
-  "version": "1.0.10",
+  "version": "1.1.0",
   "app_id": "ffa303a745844dac899c65b4",
   "store_url": "https://apps.repebble.com/ffa303a745844dac899c65b4",
   "uuid": "3bd45600-4ca0-49b6-8129-f840caaf0201",
   "visible": true,
   "is_published": true,
   "has_pbw": true,
-  "published_date": "2026-11-01T17:49:28.687",
-  "release_notes": "The flick-view clock now shows your chosen second timezone. After reaching your step goal, the step box keeps filling: yellow over blue to 200%, green over yellow to 300%, then the palette repeats for further goals. Existing settings are preserved.",
+  "published_date": "2026-11-01T18:48:49.093",
+  "release_notes": "Search all 597 IANA timezone identifiers by city, region or timezone name, including Mumbai, Abu Dhabi and Moscow. Common choices are shown first. Automatic daylight saving and half-hour/quarter-hour offsets work offline on the watch. Existing timezone selections and saved settings are preserved.",
   "gallery_counts": {
     "emery": 2
   },
-  "screenshots_unchanged": false,
-  "kit_version": "2.3.0",
-  "kit_revision": "61eb1abee64bd57029be23d6c753336b72768f18",
-  "source_revision": "3e24b27c01389df4008ac72c94657863c3eb7c06",
-  "local_pbw_sha256": "369dad2f9fcef3cdf43f85be47b206e1d1504c1a412cf100849b1e962f871c9a",
+  "screenshots_unchanged": true,
+  "kit_version": "2.4.1",
+  "kit_revision": "2dcfa7302bf07aabb9a1f5f0974064b638dd5ac8",
+  "source_revision": "fd207afaba4855822adf7b0ce6884d37cc778b02",
+  "local_pbw_sha256": "10169ef39c5ae889425ff956046123e6f771f17683b0486671937020accb1676",
   "release_build_provenance": {
-    "created_utc": "2026-11-01T17:47:48.133882+00:00",
+    "created_utc": "2026-11-01T18:48:28.179864+00:00",
     "app": "pebble-mondrian",
-    "version": "1.0.10",
+    "version": "1.1.0",
     "uuid": "3bd45600-4ca0-49b6-8129-f840caaf0201",
-    "app_revision": "3e24b27c01389df4008ac72c94657863c3eb7c06",
+    "app_revision": "fd207afaba4855822adf7b0ce6884d37cc778b02",
     "app_modified": false,
-    "kit_version": "2.3.0",
-    "kit_revision": "61eb1abee64bd57029be23d6c753336b72768f18",
+    "kit_version": "2.4.1",
+    "kit_revision": "2dcfa7302bf07aabb9a1f5f0974064b638dd5ac8",
     "kit_repository": "https://github.com/LiamCordelle/pebble-watchface-kit.git",
-    "pbw_sha256": "369dad2f9fcef3cdf43f85be47b206e1d1504c1a412cf100849b1e962f871c9a",
+    "pbw_sha256": "10169ef39c5ae889425ff956046123e6f771f17683b0486671937020accb1676",
     "scenario": 3,
     "touch_window_ms": 0,
     "tests_passed": true,
     "renders_checked": true
+  },
+  "timezone_data": {
+    "iana_version": "2026f",
+    "identifiers": 597,
+    "reference_comparisons": 1499067
   },
   "runtime_improvement_verification": {
     "goal_percentages": [
@@ -44,22 +49,27 @@
     "clock_pixel_checks": [
       "Tokyo 24h",
       "Tokyo 12h",
-      "UTC large"
+      "UTC large",
+      "Mumbai 24h",
+      "Abu Dhabi large",
+      "Moscow 12h",
+      "Kathmandu 24h",
+      "Last timezone ID"
     ],
     "detail_timeout": true,
     "report": {
       "frames": [
         {
           "view": "face",
-          "wall_ms": 7
+          "wall_ms": 8
         },
         {
           "view": "face",
-          "wall_ms": 3
+          "wall_ms": 2
         },
         {
           "view": "face",
-          "wall_ms": 6
+          "wall_ms": 5
         },
         {
           "view": "face",
@@ -75,11 +85,99 @@
         },
         {
           "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 12
+        },
+        {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
           "wall_ms": 5
         },
         {
           "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
           "wall_ms": 11
+        },
+        {
+          "view": "face",
+          "wall_ms": 7
+        },
+        {
+          "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 11
+        },
+        {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 11
+        },
+        {
+          "view": "face",
+          "wall_ms": 5
+        },
+        {
+          "view": "face",
+          "wall_ms": 5
+        },
+        {
+          "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 11
+        },
+        {
+          "view": "face",
+          "wall_ms": 8
+        },
+        {
+          "view": "detail",
+          "wall_ms": 5
+        },
+        {
+          "view": "detail",
+          "wall_ms": 3
         },
         {
           "view": "face",
@@ -94,92 +192,8 @@
           "wall_ms": 13
         },
         {
-          "view": "face",
-          "wall_ms": 7
-        },
-        {
-          "view": "face",
-          "wall_ms": 4
-        },
-        {
-          "view": "face",
-          "wall_ms": 4
-        },
-        {
-          "view": "face",
-          "wall_ms": 5
-        },
-        {
-          "view": "face",
-          "wall_ms": 3
-        },
-        {
-          "view": "face",
-          "wall_ms": 12
-        },
-        {
-          "view": "face",
-          "wall_ms": 7
-        },
-        {
-          "view": "face",
-          "wall_ms": 3
-        },
-        {
-          "view": "face",
-          "wall_ms": 11
-        },
-        {
-          "view": "face",
-          "wall_ms": 6
-        },
-        {
-          "view": "face",
-          "wall_ms": 3
-        },
-        {
-          "view": "face",
-          "wall_ms": 10
-        },
-        {
-          "view": "face",
-          "wall_ms": 3
-        },
-        {
-          "view": "face",
-          "wall_ms": 6
-        },
-        {
-          "view": "face",
-          "wall_ms": 3
-        },
-        {
-          "view": "face",
-          "wall_ms": 12
-        },
-        {
           "view": "detail",
-          "wall_ms": 7
-        },
-        {
-          "view": "detail",
-          "wall_ms": 2
-        },
-        {
-          "view": "face",
           "wall_ms": 6
-        },
-        {
-          "view": "face",
-          "wall_ms": 3
-        },
-        {
-          "view": "face",
-          "wall_ms": 4
-        },
-        {
-          "view": "detail",
-          "wall_ms": 10
         },
         {
           "view": "detail",
@@ -199,32 +213,153 @@
         },
         {
           "view": "detail",
+          "wall_ms": 6
+        },
+        {
+          "view": "detail",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "detail",
           "wall_ms": 7
         },
         {
           "view": "detail",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "detail",
+          "wall_ms": 4
+        },
+        {
+          "view": "detail",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 7
+        },
+        {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "detail",
+          "wall_ms": 8
+        },
+        {
+          "view": "detail",
+          "wall_ms": 2
+        },
+        {
+          "view": "face",
+          "wall_ms": 4
+        },
+        {
+          "view": "face",
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 13
+        },
+        {
+          "view": "detail",
+          "wall_ms": 7
+        },
+        {
+          "view": "detail",
+          "wall_ms": 2
+        },
+        {
+          "view": "face",
           "wall_ms": 5
         },
         {
           "view": "face",
-          "wall_ms": 11
+          "wall_ms": 3
+        },
+        {
+          "view": "face",
+          "wall_ms": 13
+        },
+        {
+          "view": "detail",
+          "wall_ms": 7
+        },
+        {
+          "view": "face",
+          "wall_ms": 12
         }
       ],
       "clock_discontinuity_candidates": [],
       "faults": [],
       "starts": [
-        "2.3.0",
-        "2.3.0",
-        "2.3.0",
-        "2.3.0",
-        "2.3.0",
-        "2.3.0",
-        "2.3.0",
-        "2.3.0",
-        "2.3.0",
-        "2.3.0"
+        "2.4.1",
+        "2.4.1",
+        "2.4.1",
+        "2.4.1",
+        "2.4.1",
+        "2.4.1",
+        "2.4.1",
+        "2.4.1",
+        "2.4.1",
+        "2.4.1",
+        "2.4.1",
+        "2.4.1",
+        "2.4.1",
+        "2.4.1",
+        "2.4.1"
       ],
       "exits": [
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
         {
           "app": "Mondrian",
           "allocated_bytes": 0
@@ -269,5 +404,108 @@
       "weather_acceptances": 1
     }
   },
-  "verification": "Authenticated store record confirms the existing app, visible published 1.0.10, PBW and two refreshed Emery screenshots. Publish build hash matches the tested release artifact."
+  "verification": "Authenticated store record confirms existing app, visible published 1.1.0, PBW and retained two-image Emery gallery. Published PBW hash matches the tested release.",
+  "final_published_artifact_runtime": {
+    "pbw_sha256": "10169ef39c5ae889425ff956046123e6f771f17683b0486671937020accb1676",
+    "saved_timezone": 289,
+    "saved_timezone_label": "MUM",
+    "report": {
+      "frames": [
+        {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 2
+        },
+        {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 13
+        },
+        {
+          "view": "face",
+          "wall_ms": 5
+        },
+        {
+          "view": "face",
+          "wall_ms": 6
+        },
+        {
+          "view": "face",
+          "wall_ms": 2
+        },
+        {
+          "view": "face",
+          "wall_ms": 8
+        },
+        {
+          "view": "detail",
+          "wall_ms": 8
+        }
+      ],
+      "clock_discontinuity_candidates": [],
+      "faults": [],
+      "starts": [
+        "2.4.1",
+        "2.4.1"
+      ],
+      "exits": [
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        },
+        {
+          "app": "Mondrian",
+          "allocated_bytes": 0
+        }
+      ],
+      "weather_acceptances": 1
+    }
+  },
+  "settings_search_verification": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "clay_version": "1.0.10",
+    "checks": [
+      "Common seven plus current selected zone on reopen",
+      "Mumbai case-insensitive live filter",
+      "Asia/Kolkata IANA-name filter",
+      "Selecting Abu Dhabi then clearing search",
+      "No matches retains selected zone",
+      "Enter does not submit the form",
+      "Save with Moscow query retains explicitly chosen Abu Dhabi WORLD 268",
+      "Search/status absent from serialized settings"
+    ],
+    "save_payload": {
+      "TIME_MODE": {
+        "value": "0"
+      },
+      "TEMP_UNIT": {
+        "value": "0"
+      },
+      "LARGE_LABELS": {
+        "value": false
+      },
+      "WORLD": {
+        "value": "268"
+      },
+      "STEP_GOAL": {
+        "value": 8000
+      },
+      "WEATHER_ENABLED": {
+        "value": true
+      },
+      "DEMO_FALLBACK": {
+        "value": false
+      }
+    },
+    "screenshot": "timezone-search-mobile.jpg"
+  }
 }
