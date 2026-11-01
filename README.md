@@ -257,11 +257,11 @@ time limit. Rule changes are delivered by watchface updates. The shared kit
 owns timezone data, calculations, persistence and tests; Mondrian owns the
 picker opt-in, compact labels' placement and screenshot scenarios.
 
-1.1.0 candidate dependency: kit 2.3.0 `61eb1abee64bd57029be23d6c753336b72768f18`
+1.1.0 release dependency: kit 2.3.0 `61eb1abee64bd57029be23d6c753336b72768f18`
 to 2.4.0 `f8b2486e0f2f7d0f67fee9d90775fe34a4bfdbd6`. The original kit and
 consumer worktrees were clean; fetching origin/main confirmed 2.3.0 was current.
-The new kit is committed locally and awaits publication permission. The guarded
-release command refuses unpublished kit commits, so the current PBW is a
-development candidate. Shared/native/phone tests, 1,499,067 reference timezone
+The tested kit is shared on remote main. The live release is built with
+`npm run release -- --render`, recording the source, kit revision and artifact
+checksum. Shared/native/phone tests, 1,499,067 reference timezone
 comparisons, all five consumer builds/renders, 100 Mondrian scenes and QEMU
 settings/restart/cache/clock checks pass.
