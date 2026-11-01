@@ -1,1 +1,1 @@
-The flick-view clock now shows your chosen second timezone. After reaching your step goal, the step box keeps filling: yellow over blue to 200%, green over yellow to 300%, then the palette repeats for further goals. Existing settings are preserved.
+Choose from all 597 IANA timezone identifiers, including Mumbai, Abu Dhabi and Moscow. Automatic daylight saving and half-hour/quarter-hour offsets work offline on the watch. Existing timezone selections and saved settings are preserved.

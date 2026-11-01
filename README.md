@@ -4,7 +4,7 @@ A De Stijl composition whose planes respond to your day: red for heart rate,
 blue for steps, yellow for daylight, and a shrinking grey battery plane.
 The tap view recomposes it into a week of steps and heart/weather ranges.
 
-Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.0.10.
+Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.1.0.
 The default demo is **pixel-identical** to the original Watchface Lab proposal.
 Following Liam's review, the original geometry and compact Silkscreen captions
 are the default. Larger labels are an opt-in Clay setting; that setting enlarges
@@ -73,7 +73,8 @@ show the total percentage. The weekly detail chart keeps its existing colours
 and full-height goal marker.
 
 Clay settings: watch/12/24-hour format, Celsius/Fahrenheit, step goal (8,000 by
-default), second time zone (NZ, UTC, LON, NYC, LA, TKY, SYD), weather, optional
+default), second time zone (all 597 IANA identifiers, including Mumbai, Abu Dhabi and
+Moscow), weather, optional
 health demo fallback and larger labels. Settings apply live and persist.
 Normal health data is never replaced by demo values unless fallback is enabled.
 
@@ -177,7 +178,7 @@ actual battery drain before choosing a different default.
 ## Kit and release files
 
 The reusable kit is now [pebble-watchface-kit](https://github.com/LiamCordelle/pebble-watchface-kit),
-version 2.3.0, included through the `shared-kit` Git submodule. It preserves the
+version 2.4.0, included through the `shared-kit` Git submodule. It preserves the
 lab contracts and shares watch/phone modules, tests, health, weather and settings
 with Underground. See [kit documentation](shared-kit/README.md).
 
@@ -219,7 +220,7 @@ Release 1.0.7: built with the shared kit 2.0.0; artwork and settings are preserv
 
 ## Shared behaviour maintenance
 
-This release uses kit 2.3.0 for shared data and calculations.
+This release uses kit 2.4.0 for shared data and calculations.
 Artwork and explicit render fixtures remain face-owned. Run
 `tools/emulator_smoke.py` with pebble-tool's Python for common runtime checks;
 local emulator/visual checkers retain the face-specific assertions.
@@ -242,3 +243,25 @@ with larger labels), the detail timeout and clean exits. Evidence is in
 `shots/emulator-improvements/`; run `tools/emulator_improvements.py` with
 pebble-tool's Python to repeat those checks. The SDK profile is restored and
 QEMU stopped after each session.
+
+## 1.1.0 timezone support
+
+The second-timezone picker includes all 597 identifiers and aliases in IANA
+tzdata 2026f. Choose Mumbai / Kolkata (India), Abu Dhabi / Dubai (UAE), or
+Europe / Moscow for the three requested locations. Both secondary clocks use the selected zone.
+Half-hour and quarter-hour offsets and daylight-saving changes work offline.
+Original selections and saved step goals survive the upgrade.
+
+The bundled rules cover 2020 through January 2038, the watch's signed 32-bit
+time limit. Rule changes are delivered by watchface updates. The shared kit
+owns timezone data, calculations, persistence and tests; Mondrian owns the
+picker opt-in, compact labels' placement and screenshot scenarios.
+
+1.1.0 candidate dependency: kit 2.3.0 `61eb1abee64bd57029be23d6c753336b72768f18`
+to 2.4.0 `f8b2486e0f2f7d0f67fee9d90775fe34a4bfdbd6`. The original kit and
+consumer worktrees were clean; fetching origin/main confirmed 2.3.0 was current.
+The new kit is committed locally and awaits publication permission. The guarded
+release command refuses unpublished kit commits, so the current PBW is a
+development candidate. Shared/native/phone tests, 1,499,067 reference timezone
+comparisons, all five consumer builds/renders, 100 Mondrian scenes and QEMU
+settings/restart/cache/clock checks pass.

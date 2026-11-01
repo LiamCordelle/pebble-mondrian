@@ -10,14 +10,39 @@
   "clock_pixel_checks": [
     "Tokyo 24h",
     "Tokyo 12h",
-    "UTC large"
+    "UTC large",
+    "Mumbai 24h",
+    "Abu Dhabi large",
+    "Moscow 12h",
+    "Kathmandu 24h",
+    "Last timezone ID"
   ],
   "detail_timeout": true,
   "report": {
     "frames": [
       {
         "view": "face",
-        "wall_ms": 7
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 5
+      },
+      {
+        "view": "face",
+        "wall_ms": 12
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
       },
       {
         "view": "face",
@@ -26,26 +51,6 @@
       {
         "view": "face",
         "wall_ms": 6
-      },
-      {
-        "view": "face",
-        "wall_ms": 12
-      },
-      {
-        "view": "face",
-        "wall_ms": 5
-      },
-      {
-        "view": "face",
-        "wall_ms": 6
-      },
-      {
-        "view": "face",
-        "wall_ms": 5
-      },
-      {
-        "view": "face",
-        "wall_ms": 11
       },
       {
         "view": "face",
@@ -57,11 +62,35 @@
       },
       {
         "view": "face",
-        "wall_ms": 13
+        "wall_ms": 12
       },
       {
         "view": "face",
-        "wall_ms": 7
+        "wall_ms": 5
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 5
+      },
+      {
+        "view": "face",
+        "wall_ms": 5
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
       },
       {
         "view": "face",
@@ -81,51 +110,31 @@
       },
       {
         "view": "face",
-        "wall_ms": 12
-      },
-      {
-        "view": "face",
-        "wall_ms": 7
-      },
-      {
-        "view": "face",
         "wall_ms": 3
       },
       {
         "view": "face",
-        "wall_ms": 11
+        "wall_ms": 4
       },
       {
         "view": "face",
-        "wall_ms": 6
+        "wall_ms": 4
       },
       {
         "view": "face",
-        "wall_ms": 3
+        "wall_ms": 2
       },
       {
         "view": "face",
-        "wall_ms": 10
+        "wall_ms": 5
       },
       {
         "view": "face",
-        "wall_ms": 3
-      },
-      {
-        "view": "face",
-        "wall_ms": 6
-      },
-      {
-        "view": "face",
-        "wall_ms": 3
-      },
-      {
-        "view": "face",
-        "wall_ms": 12
+        "wall_ms": 4
       },
       {
         "view": "detail",
-        "wall_ms": 7
+        "wall_ms": 3
       },
       {
         "view": "detail",
@@ -133,26 +142,6 @@
       },
       {
         "view": "face",
-        "wall_ms": 6
-      },
-      {
-        "view": "face",
-        "wall_ms": 3
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "detail",
-        "wall_ms": 10
-      },
-      {
-        "view": "detail",
-        "wall_ms": 3
-      },
-      {
-        "view": "face",
         "wall_ms": 4
       },
       {
@@ -161,36 +150,177 @@
       },
       {
         "view": "face",
-        "wall_ms": 9
+        "wall_ms": 3
       },
       {
         "view": "detail",
-        "wall_ms": 7
+        "wall_ms": 2
       },
       {
         "view": "detail",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "detail",
+        "wall_ms": 3
+      },
+      {
+        "view": "detail",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 2
+      },
+      {
+        "view": "detail",
+        "wall_ms": 3
+      },
+      {
+        "view": "detail",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 16
+      },
+      {
+        "view": "face",
+        "wall_ms": 13
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "detail",
+        "wall_ms": 3
+      },
+      {
+        "view": "detail",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
         "wall_ms": 5
       },
       {
         "view": "face",
-        "wall_ms": 11
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "detail",
+        "wall_ms": 3
+      },
+      {
+        "view": "detail",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 5
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 5
+      },
+      {
+        "view": "detail",
+        "wall_ms": 3
+      },
+      {
+        "view": "detail",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 5
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "detail",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 13
       }
     ],
     "clock_discontinuity_candidates": [],
     "faults": [],
     "starts": [
-      "2.3.0",
-      "2.3.0",
-      "2.3.0",
-      "2.3.0",
-      "2.3.0",
-      "2.3.0",
-      "2.3.0",
-      "2.3.0",
-      "2.3.0",
-      "2.3.0"
+      "2.4.0",
+      "2.4.0",
+      "2.4.0",
+      "2.4.0",
+      "2.4.0",
+      "2.4.0",
+      "2.4.0",
+      "2.4.0",
+      "2.4.0",
+      "2.4.0",
+      "2.4.0",
+      "2.4.0",
+      "2.4.0",
+      "2.4.0",
+      "2.4.0"
     ],
     "exits": [
+      {
+        "app": "Mondrian",
+        "allocated_bytes": 0
+      },
+      {
+        "app": "Mondrian",
+        "allocated_bytes": 0
+      },
+      {
+        "app": "Mondrian",
+        "allocated_bytes": 0
+      },
+      {
+        "app": "Mondrian",
+        "allocated_bytes": 0
+      },
+      {
+        "app": "Mondrian",
+        "allocated_bytes": 0
+      },
       {
         "app": "Mondrian",
         "allocated_bytes": 0

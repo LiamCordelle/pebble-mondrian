@@ -2,5 +2,6 @@
 module.exports = {
   heading: 'Mondrian',
   storageKey: 'mondrian-kit-settings-v1',
-  largeLabels: true
+  largeLabels: true,
+  fullTimezones: true
 };

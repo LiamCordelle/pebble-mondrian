@@ -42,6 +42,12 @@ for name,values in [
     ('world-12h',{'12H':1}),('world-midnight',{'WORLD':1,'HOUR':1,'MINUTE':0}),
     ('world-large',{'LARGE_LABELS':1}),('world-disconnected',{'PHONE':0})]:
     scenes.append((name,0,True,values))
+for name,zone in [('mumbai',289),('abu-dhabi',268),('moscow',463),
+                  ('kathmandu',286),('chatham',533),('kiritimati',548)]:
+    for detail in [False,True]:
+        for large in [False,True]:
+            scenes.append(('world-'+name+('-detail' if detail else '')+('-large' if large else ''),
+                           0,detail,{'WORLD':zone,'LARGE_LABELS':int(large)}))
 for name,code in [('sun',0),('partly',2),('cloud',3),('rain',63),('snow',73),('storm',95),('fog',45)]:
     scenes.append(('weather-'+name,0,False,{'WEATHER_CODE':code}))
 def render(scene):

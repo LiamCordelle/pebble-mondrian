@@ -9,6 +9,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import time
 from PIL import Image, ImageChops
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,14 +22,17 @@ def check_clock(emu, zone, h12, large=False):
     settings = dict(common_settings(8000), WORLD=zone, TIME_MODE=1 if h12 else 2,
                     LARGE_LABELS=large)
     emu.apply_clay(settings)
-    emu.restart()
+    mark = emu.restart()
+    emu.logs.wait('Kit settings loaded: goal=8000',since=mark)
+    second=dt.datetime.now(dt.timezone.utc).second
+    if second>=55: time.sleep(61-second)  # Keep the glyph comparison within one minute.
     mark = emu.logs.mark()
     emu.cli('emu-tap')
     emu.logs.wait('Frame detail', since=mark)
     stamp = dt.datetime.now(dt.timezone.utc)
     name = f'clock-{zone}-{12 if h12 else 24}'+('-large' if large else '')
     actual = emu.screenshot(name+'.png')
-    # Fixture local time is UTC+1 on 17 October. UTC/Tokyo have no DST,
+    # Fixture local time is UTC+1 on 17 October. These runtime zones have no DST,
     # so align its UTC minute to the live one for an independent glyph check.
     expected = emu.output/(name+'-expected.png')
     env = dict(os.environ, MONDRIAN_WORLD=str(zone), MONDRIAN_12H=str(int(h12)),
@@ -64,7 +68,9 @@ with EmulatorSession(ROOT, ROOT/'shots/emulator-improvements') as emu:
         assert image.getpixel((194,111)) == palette[top], (pct,'previous colour')
         assert image.getpixel((194,225)) == palette[bottom], (pct,'current colour')
         print('Verified live step fill:', pct, flush=True)
-    for zone, h12, large in [(5,False,False), (5,True,False), (1,False,True)]:
+    for zone, h12, large in [(5,False,False), (5,True,False), (1,False,True),
+                             (289,False,False), (268,False,True), (463,True,False),
+                             (286,False,False), (596,False,False)]:
         check_clock(emu, zone, h12, large)
     mark = emu.logs.mark()
     emu.logs.wait('Frame face', since=mark, timeout=12)
@@ -74,6 +80,7 @@ with EmulatorSession(ROOT, ROOT/'shots/emulator-improvements') as emu:
     assert not report['faults'], report['faults']
     (emu.output/'result.json').write_text(json.dumps({
         'goal_percentages': [100,150,200,250,300,350],
-        'clock_pixel_checks': ['Tokyo 24h','Tokyo 12h','UTC large'],
+        'clock_pixel_checks': ['Tokyo 24h','Tokyo 12h','UTC large','Mumbai 24h',
+                               'Abu Dhabi large','Moscow 12h','Kathmandu 24h','Last timezone ID'],
         'detail_timeout': True, 'report': report}, indent=2)+'\n')
     print('Mondrian improvement checks passed; clean exits and no app faults.', flush=True)

@@ -16,7 +16,7 @@
       },
       {
         "view": "face",
-        "wall_ms": 6
+        "wall_ms": 5
       },
       {
         "view": "face",
@@ -24,11 +24,35 @@
       },
       {
         "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
         "wall_ms": 3
       },
       {
         "view": "face",
         "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
       },
       {
         "view": "face",
@@ -40,39 +64,15 @@
       },
       {
         "view": "face",
-        "wall_ms": 12
-      },
-      {
-        "view": "face",
-        "wall_ms": 8
-      },
-      {
-        "view": "face",
-        "wall_ms": 3
-      },
-      {
-        "view": "face",
         "wall_ms": 4
       },
       {
         "view": "face",
-        "wall_ms": 7
-      },
-      {
-        "view": "face",
         "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 8
-      },
-      {
-        "view": "face",
-        "wall_ms": 10
       },
       {
         "view": "detail",
-        "wall_ms": 9
+        "wall_ms": 11
       },
       {
         "view": "face",
@@ -82,9 +82,9 @@
     "clock_discontinuity_candidates": [],
     "faults": [],
     "starts": [
-      "2.3.0",
-      "2.3.0",
-      "2.3.0"
+      "2.4.0",
+      "2.4.0",
+      "2.4.0"
     ],
     "exits": [
       {

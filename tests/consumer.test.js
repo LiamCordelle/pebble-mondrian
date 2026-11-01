@@ -8,6 +8,8 @@ assert.strictEqual(schema[0].defaultValue,pkg.pebble.displayName);
 var expected=pkg.name==='pebble-mondrian'?'mondrian-kit-settings-v1':'underground-kit-settings-v1';
 assert.strictEqual(options.storageKey,expected);
 assert.strictEqual(options.largeLabels,pkg.name==='pebble-mondrian');
+assert.strictEqual(options.fullTimezones,true);
+assert(schema[1].items.find(function(item){return item.messageKey==='WORLD';}).options.length>500);
 var display=schema[1].items;
 assert.strictEqual(display.some(function(v){return v.messageKey==='LARGE_LABELS';}),options.largeLabels);
 var memory={};memory[expected]=JSON.stringify({TIME_MODE:2,TEMP_UNIT:1,STEP_GOAL:18000});

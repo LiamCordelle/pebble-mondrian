@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0 — 1 November 2026
+
+- Expand the second-timezone picker to all 597 IANA identifiers and aliases,
+  including Mumbai, Abu Dhabi and Moscow. The main and flick clocks show the
+  selected location with automatic offline daylight-saving transitions.
+- Include half-hour and quarter-hour offsets. Keep existing timezone selections,
+  saved step goals and message keys intact.
+- Use shared kit 2.4.0 with bundled IANA tzdata 2026f.
+
 ## 1.0.10 — 1 November 2026
 
 - Show the configured second timezone and its label in the flick-view clock.
