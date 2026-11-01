@@ -6,8 +6,8 @@
 //
 // The grid lines are 6 px, the stem width of LECO 42, so the clock is built
 // from the same black bars as the painting. Two lines are driven by data:
-//   - steps: the blue plane rises through the bottom-right plane; the white
-//     remainder above it is the distance still to walk.
+//   - steps: blue rises to the goal, then red/yellow/blue rise over the previous
+//     colour for each further goal interval.
 //   - battery: the grey plane in the bottom-left corner shrinks with charge
 //     (red below 10%).
 // The sun cell is yellow while the sun is up and black after sunset.
@@ -415,9 +415,15 @@ static void draw_battery(GContext *ctx, const LabData *d) {
 static void draw_steps(GContext *ctx, const LabData *d) {
   GRect c = R_STEPS;
   int32_t goal = d->step_goal > 0 ? d->step_goal : KIT_DEFAULT_STEP_GOAL;
-  int permille = d->steps_ok ? (int)((d->steps * 1000) / goal) : 0;
+  KitGoalProgress progress = kit_goal_progress(d->steps_ok ? d->steps : 0, goal);
+  const GColor colours[] = {COL_BLUE, COL_RED, COL_YELLOW};
+  GColor current = colours[progress.cycle % ARRAY_LENGTH(colours)];
+  GColor previous = progress.cycle ? colours[(progress.cycle - 1) % ARRAY_LENGTH(colours)] : GColorWhite;
+  GColor current_ink = progress.cycle % 3 == 2 ? GColorBlack : GColorWhite;
+  GColor previous_ink = !progress.cycle || (progress.cycle - 1) % 3 == 2 ? GColorBlack : GColorWhite;
+  fill(ctx, c, previous);
   bool divider;
-  int h = split_len(c.size.h, permille, &divider);
+  int h = split_len(c.size.h, progress.permille, &divider);
   int bottom = c.origin.y + c.size.h;
   if (divider) {
     // Continue a line of the left column when the divider lands close to it.
@@ -428,39 +434,39 @@ static void draw_steps(GContext *ctx, const LabData *d) {
       }
     }
   }
-  int blue_y = bottom - h;
-  fill(ctx, GRect(c.origin.x, blue_y, c.size.w, h), COL_BLUE);
+  int fill_y = bottom - h;
+  fill(ctx, GRect(c.origin.x, fill_y, c.size.w, h), current);
   if (divider) {
-    fill(ctx, GRect(c.origin.x, blue_y - LW, c.size.w, LW), GColorBlack);
+    fill(ctx, GRect(c.origin.x, fill_y - LW, c.size.w, LW), GColorBlack);
   }
-  int white_h = c.size.h - h - (divider ? LW : 0);
+  int remainder_h = c.size.h - h - (divider ? LW : 0);
 
   char count[12];
   char lab[24];
   if (d->steps_ok) {
     snprintf(count, sizeof(count), "%ld", (long)d->steps);
     if (s_large_labels) snprintf(lab, sizeof(lab), "STEPS");
-    else snprintf(lab,sizeof(lab),"STEPS %d%%",permille/10);
+    else snprintf(lab,sizeof(lab),"STEPS %d%%",progress.percent);
   } else {
     snprintf(count, sizeof(count), "--");
     snprintf(lab, sizeof(lab), "STEPS");
   }
   int x = c.origin.x + PAD;
-  // Label: top of the white remainder, or top of the blue once the remainder
+  // Label: top of the previous colour, or top of the new fill once the remainder
   // is too thin to hold it.
-  if (white_h >= 2 * PAD + s_face[caption()].h) {
-    ink_text(ctx, lab, caption(), x, c.origin.y + PAD, GColorBlack);
+  if (remainder_h >= 2 * PAD + s_face[caption()].h) {
+    ink_text(ctx, lab, caption(), x, c.origin.y + PAD, previous_ink);
   } else {
-    ink_text(ctx, lab, caption(), x, blue_y + PAD, GColorWhite);
+    ink_text(ctx, lab, caption(), x, fill_y + PAD, current_ink);
   }
-  // Count: foot of the blue, or just above the divider while the blue is low.
+  // Count: foot of the new fill, or just above the divider while it is low.
   const int count_h = s_face[FACE_L26].h;
   if (h >= 2 * PAD + count_h) {
-    ink_text(ctx, count, FACE_L26, x, bottom - PAD - count_h, GColorWhite);
+    ink_text(ctx, count, FACE_L26, x, bottom - PAD - count_h, current_ink);
   } else if (divider) {
-    ink_text(ctx, count, FACE_L26, x, blue_y - LW - PAD - count_h, GColorBlack);
+    ink_text(ctx, count, FACE_L26, x, fill_y - LW - PAD - count_h, previous_ink);
   } else {
-    ink_text(ctx, count, FACE_L26, x, bottom - PAD - count_h, GColorBlack);
+    ink_text(ctx, count, FACE_L26, x, bottom - PAD - count_h, previous_ink);
   }
 }
 
@@ -509,9 +515,9 @@ static const GRect D_HEART = {{0, DT_HEART_Y}, {200, MID_Y - DT_HEART_Y}};
 static const GRect D_WEEK = {{0, BOT_Y}, {200, 228 - BOT_Y}};
 
 static void detail_time(GContext *ctx, const LabData *d) {
-  cell_label(ctx, D_TIME, d->bt_connected ? "BT ON" : "BT OFF", GColorBlack);
+  cell_label(ctx, D_TIME, d->world_label, GColorBlack);
   char t[8];
-  lab_fmt_time(t, sizeof(t), d->now.tm_hour, d->now.tm_min, d->is_24h);
+  lab_fmt_time(t, sizeof(t), d->world_hour, d->world_min, d->is_24h);
   cell_value(ctx, D_TIME, t, FACE_L20, GColorBlack);
 }
 
@@ -659,7 +665,8 @@ static void detail_week(GContext *ctx, const LabData *d) {
     int x0 = c.origin.x + (inner * i) / 7 + i * LW;
     int w = (inner * (i + 1)) / 7 - (inner * i) / 7;
     int32_t steps = k == 0 && d->steps_ok ? d->steps : d->steps_by_day[k];
-    int permille = (int)((steps * 1000) / goal);
+    KitGoalProgress progress = kit_goal_progress(steps, goal);
+    int permille = progress.cycle ? 1000 : progress.permille;
     int h;
     if (steps <= 0) {
       h = 0;

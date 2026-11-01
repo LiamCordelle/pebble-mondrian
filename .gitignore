@@ -14,3 +14,10 @@ shots/emulator-smoke/*
 !shots/emulator-smoke/detail.png
 !shots/emulator-smoke/timeout.png
 !shots/emulator-smoke/fresh-default.png
+shots/emulator-improvements/*
+!shots/emulator-improvements/result.json
+!shots/emulator-improvements/goal-*.png
+!shots/emulator-improvements/clock-5-24.png
+!shots/emulator-improvements/clock-5-12.png
+!shots/emulator-improvements/clock-1-24-large.png
+!shots/emulator-improvements/timeout.png

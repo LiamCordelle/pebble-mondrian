@@ -33,6 +33,15 @@ scenes=[('demo',0,False,{}),('stress',1,False,{}),('empty',2,False,{}),
         ('heart-220',0,False,{'HR':220}),('step-sliver',0,False,{'STEPS':100}),
         ('near-goal',0,False,{'STEPS':9870})]
 scenes.append(('unknown-daylight',0,False,{'NO_SUN':1}))
+for pct in [0,50,100,101,125,150,175,199,200,201,250,299,300,301,350,400]:
+    for large in [False,True]:
+        scenes.append((f'goal-{pct}'+('-large' if large else ''),0,False,
+                       {'STEPS':pct*80,'STEP_GOAL':8000,'LARGE_LABELS':int(large)}))
+for name,values in [
+    ('world-nz',{}),('world-utc',{'WORLD':1}),('world-nyc',{'WORLD':3}),
+    ('world-12h',{'12H':1}),('world-midnight',{'WORLD':1,'HOUR':1,'MINUTE':0}),
+    ('world-large',{'LARGE_LABELS':1}),('world-disconnected',{'PHONE':0})]:
+    scenes.append((name,0,True,values))
 for name,code in [('sun',0),('partly',2),('cloud',3),('rain',63),('snow',73),('storm',95),('fog',45)]:
     scenes.append(('weather-'+name,0,False,{'WEATHER_CODE':code}))
 def render(scene):
@@ -52,6 +61,23 @@ reference=Image.open(LAB/'designs/05-mondrian/shots/demo.png').convert('RGB')
 actual=Image.open(SHOTS/'demo.png').convert('RGB')
 assert ImageChops.difference(reference,actual).getbbox() is None,'Default art changed from original'
 assert Image.open(SHOTS/'unknown-daylight.png').convert('RGB').getpixel((74,195))==(255,255,255), 'Unknown daylight must retain a neutral sun cell'
+# The Lab renderer applies its display palette; sample the existing planes.
+white=actual.getpixel((194,10))
+blue=actual.getpixel((194,225))
+red=actual.getpixel((194,60))
+yellow=actual.getpixel((74,195))
+for pct,top,bottom in [(0,white,white),(50,white,blue),(100,blue,blue),
+                       (150,blue,red),(200,red,red),(250,red,yellow),
+                       (300,yellow,yellow),(350,yellow,blue),(400,blue,blue)]:
+    for suffix in ['', '-large']:
+        image=Image.open(SHOTS/f'goal-{pct}{suffix}.png').convert('RGB')
+        assert image.getpixel((194,111))==top,(pct,suffix,'previous colour')
+        assert image.getpixel((194,225))==bottom,(pct,suffix,'current colour')
+# The detail clock must change when the world setting changes, including 12h.
+def clock(name):return Image.open(SHOTS/(name+'.png')).crop((0,0,72,56)).convert('RGB')
+assert ImageChops.difference(clock('world-nz'),clock('world-utc')).getbbox()
+assert ImageChops.difference(clock('world-nz'),clock('world-12h')).getbbox()
+assert ImageChops.difference(clock('world-nz'),clock('world-disconnected')).getbbox() is None
 cols=6;rows=(len(scenes)+cols-1)//cols
 sheet=Image.new('RGB',(cols*216,rows*254),'#dedede');draw=ImageDraw.Draw(sheet)
 for i,(name,*_) in enumerate(scenes):
@@ -60,5 +86,5 @@ for i,(name,*_) in enumerate(scenes):
     sheet.paste(Image.open(SHOTS/(name+'.png')).convert('RGB'),(x,y+22))
 sheet.save(SHOTS/'coverage.png')
 (SHOTS/'coverage.json').write_text(json.dumps({'scenes':[s[0] for s in scenes],
-  'default_demo_pixel_identical':True},indent=2)+'\n')
+  'default_demo_pixel_identical':True,'goal_colour_checks':True,'world_clock_checks':True},indent=2)+'\n')
 print(f'Rendered {len(scenes)} scenes; default demo matches original exactly.')

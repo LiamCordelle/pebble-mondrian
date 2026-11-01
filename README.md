@@ -4,7 +4,7 @@ A De Stijl composition whose planes respond to your day: red for heart rate,
 blue for steps, yellow for daylight, and a shrinking grey battery plane.
 The tap view recomposes it into a week of steps and heart/weather ranges.
 
-Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.0.7.
+Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.0.10.
 The default demo is **pixel-identical** to the original Watchface Lab proposal.
 Following Liam's review, the original geometry and compact Silkscreen captions
 are the default. Larger labels are an opt-in Clay setting; that setting enlarges
@@ -61,6 +61,16 @@ release. For a historical rebuild, check out that app revision, run
 Tap the screen or flick your wrist to show detail for eight seconds. Tap/flick
 again to return immediately. Health updates and time ticks are limited to minute
 boundaries. There are no animations or second ticks.
+
+The detail clock shows the configured second timezone, with its label above
+the time. It follows the same 12/24-hour setting as the main clock.
+
+The main step box fills blue up to the goal. After 100%, red rises over the
+completed blue plane until 200%; yellow rises over red until 300%; then the
+blue/red/yellow sequence repeats. At exact goal multiples the box stays fully
+in the completed colour; the next step starts the next fill. Compact captions
+show the total percentage. The weekly detail chart keeps its existing colours
+and full-height goal marker.
 
 Clay settings: watch/12/24-hour format, Celsius/Fahrenheit, step goal (8,000 by
 default), second time zone (NZ, UTC, LON, NYC, LA, TKY, SYD), weather, optional
@@ -167,7 +177,7 @@ actual battery drain before choosing a different default.
 ## Kit and release files
 
 The reusable kit is now [pebble-watchface-kit](https://github.com/LiamCordelle/pebble-watchface-kit),
-version 2.0.0, included through the `shared-kit` Git submodule. It preserves the
+version 2.3.0, included through the `shared-kit` Git submodule. It preserves the
 lab contracts and shares watch/phone modules, tests, health, weather and settings
 with Underground. See [kit documentation](shared-kit/README.md).
 
@@ -209,8 +219,26 @@ Release 1.0.7: built with the shared kit 2.0.0; artwork and settings are preserv
 
 ## Shared behaviour maintenance
 
-This release uses kit 2.2.0 for shared data and calculations.
+This release uses kit 2.3.0 for shared data and calculations.
 Artwork and explicit render fixtures remain face-owned. Run
 `tools/emulator_smoke.py` with pebble-tool's Python for common runtime checks;
 local emulator/visual checkers retain the face-specific assertions.
 The published 8,000-step-default release is recorded in store/published.json.
+
+## 1.0.10 verification
+
+Candidate dependency: kit 2.2.0 `c737afcfadf8cdd62dec58941cf8718fed0d6017`
+to 2.3.0 `61eb1abee64bd57029be23d6c753336b72768f18`. Both original worktrees
+were clean; fetching `origin/main` confirmed the original SHA was current.
+The new kit commit is tested locally but awaits permission to push to remote
+main. `npm run release -- --render` correctly refuses the unpublished commit;
+the current PBW is an ordinary development build, not a completed release.
+
+Shared regression tests and 76 Mondrian render scenes pass. The main default
+composition remains pixel-identical to the original proposal. Goal fills are
+checked in compact and larger-label modes through 400%. QEMU checks verify live
+100/150/200/250/300/350% fills, timezone clock glyphs (Tokyo 12/24-hour and UTC
+with larger labels), the detail timeout and clean exits. Evidence is in
+`shots/emulator-improvements/`; run `tools/emulator_improvements.py` with
+pebble-tool's Python to repeat those checks. The SDK profile is restored and
+QEMU stopped after each session.

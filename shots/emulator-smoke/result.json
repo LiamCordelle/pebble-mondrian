@@ -16,23 +16,7 @@
       },
       {
         "view": "face",
-        "wall_ms": 2
-      },
-      {
-        "view": "face",
-        "wall_ms": 2
-      },
-      {
-        "view": "face",
-        "wall_ms": 2
-      },
-      {
-        "view": "face",
-        "wall_ms": 1005
-      },
-      {
-        "view": "face",
-        "wall_ms": 3
+        "wall_ms": 6
       },
       {
         "view": "face",
@@ -40,11 +24,31 @@
       },
       {
         "view": "face",
-        "wall_ms": 1008
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 5
       },
       {
         "view": "face",
         "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 12
+      },
+      {
+        "view": "face",
+        "wall_ms": 8
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
       },
       {
         "view": "face",
@@ -56,15 +60,19 @@
       },
       {
         "view": "face",
-        "wall_ms": 3
+        "wall_ms": 4
       },
       {
         "view": "face",
-        "wall_ms": 11
+        "wall_ms": 8
+      },
+      {
+        "view": "face",
+        "wall_ms": 10
       },
       {
         "view": "detail",
-        "wall_ms": 5
+        "wall_ms": 9
       },
       {
         "view": "face",
@@ -74,9 +82,9 @@
     "clock_discontinuity_candidates": [],
     "faults": [],
     "starts": [
-      "2.2.0",
-      "2.2.0",
-      "2.2.0"
+      "2.3.0",
+      "2.3.0",
+      "2.3.0"
     ],
     "exits": [
       {
@@ -92,6 +100,6 @@
         "allocated_bytes": 0
       }
     ],
-    "weather_acceptances": 1
+    "weather_acceptances": 3
   }
 }
