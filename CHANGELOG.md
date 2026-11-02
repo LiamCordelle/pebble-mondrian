@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.0 — 2 November 2026
+
+- Add an optional Dark mode toggle under Watchface settings. Use black
+  neutral panels and white text in both the face and flick view, retaining
+  primary colours and dark grey dividers. The original light theme remains default.
+- Save the theme on the phone and watch; preserve existing settings and goals.
+- Retain shared kit 2.4.1, confirmed current on origin/main.
+
 ## 1.1.0 — 1 November 2026
 
 - Add a searchable second-timezone picker for all 597 IANA identifiers and aliases,

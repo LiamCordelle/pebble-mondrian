@@ -16,75 +16,75 @@
       },
       {
         "view": "face",
-        "wall_ms": 5
-      },
-      {
-        "view": "face",
-        "wall_ms": 11
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 3
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 3
-      },
-      {
-        "view": "face",
-        "wall_ms": 3
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 5
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "face",
-        "wall_ms": 4
-      },
-      {
-        "view": "detail",
-        "wall_ms": 11
+        "wall_ms": 6
       },
       {
         "view": "face",
         "wall_ms": 12
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 5
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 13
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 7
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 8
+      },
+      {
+        "view": "face",
+        "wall_ms": 12
+      },
+      {
+        "view": "detail",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 11
       }
     ],
     "clock_discontinuity_candidates": [],
     "faults": [],
     "starts": [
-      "2.4.0",
-      "2.4.0",
-      "2.4.0"
+      "2.4.1",
+      "2.4.1",
+      "2.4.1"
     ],
     "exits": [
       {

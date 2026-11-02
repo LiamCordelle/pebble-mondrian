@@ -1,0 +1,99 @@
+{
+  "fresh_light_default": true,
+  "clay_toggle_both_directions": true,
+  "restart_persistence_both_themes": true,
+  "invalid_and_missing_theme_preserved": true,
+  "saved_goal_preserved": 18000,
+  "large_labels_and_detail": true,
+  "detail_timeout": true,
+  "report": {
+    "frames": [
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 12
+      },
+      {
+        "view": "face",
+        "wall_ms": 1004
+      },
+      {
+        "view": "face",
+        "wall_ms": 5
+      },
+      {
+        "view": "face",
+        "wall_ms": 2
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 6
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "detail",
+        "wall_ms": 7
+      },
+      {
+        "view": "face",
+        "wall_ms": 10
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 4
+      },
+      {
+        "view": "face",
+        "wall_ms": 3
+      },
+      {
+        "view": "face",
+        "wall_ms": 8
+      }
+    ],
+    "clock_discontinuity_candidates": [],
+    "faults": [],
+    "starts": [
+      "2.4.1",
+      "2.4.1",
+      "2.4.1"
+    ],
+    "exits": [
+      {
+        "app": "Mondrian",
+        "allocated_bytes": 0
+      },
+      {
+        "app": "Mondrian",
+        "allocated_bytes": 0
+      },
+      {
+        "app": "Mondrian",
+        "allocated_bytes": 0
+      }
+    ],
+    "weather_acceptances": 1
+  }
+}

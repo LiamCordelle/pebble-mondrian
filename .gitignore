@@ -26,3 +26,10 @@ shots/emulator-improvements/*
 !shots/emulator-improvements/clock-286-24.png
 !shots/emulator-improvements/clock-596-24.png
 !shots/emulator-improvements/timeout.png
+
+# Optional-theme runtime evidence; logs/recovery and design studies stay local.
+shots/emulator-dark-mode/*
+!shots/emulator-dark-mode/result.json
+!shots/emulator-dark-mode/*.png
+shots/theme-study/
+shots/charcoal-*.png

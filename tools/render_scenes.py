@@ -50,6 +50,9 @@ for name,zone in [('mumbai',289),('abu-dhabi',268),('moscow',463),
                            0,detail,{'WORLD':zone,'LARGE_LABELS':int(large)}))
 for name,code in [('sun',0),('partly',2),('cloud',3),('rain',63),('snow',73),('storm',95),('fog',45)]:
     scenes.append(('weather-'+name,0,False,{'WEATHER_CODE':code}))
+# Exercise both palettes through every existing visual edge case.
+scenes += [('dark-'+name,scenario,detail,dict(values,DARK_MODE=1))
+           for name,scenario,detail,values in list(scenes)]
 def render(scene):
     name,scenario,detail,values=scene
     env=os.environ.copy()
@@ -84,6 +87,24 @@ def clock(name):return Image.open(SHOTS/(name+'.png')).crop((0,0,72,56)).convert
 assert ImageChops.difference(clock('world-nz'),clock('world-utc')).getbbox()
 assert ImageChops.difference(clock('world-nz'),clock('world-12h')).getbbox()
 assert ImageChops.difference(clock('world-nz'),clock('world-disconnected')).getbbox() is None
+# Sample black neutral panels, theme-specific rules and unchanged coloured planes.
+dark=Image.open(SHOTS/'dark-demo.png').convert('RGB')
+black=dark.getpixel((194,10))
+assert black == (0,0,0)
+for point in [(135,10),(194,10),(74,110)]:
+    assert dark.getpixel(point)==black, ('dark neutral panel',point)
+for point in [(140,10),(10,104),(82,110)]:
+    assert actual.getpixel(point)==(0,0,0), ('light black grid',point)
+    assert dark.getpixel(point)==(84,84,84), ('dark grey grid',point)
+for point in [(194,52),(74,195),(194,225)]:
+    assert dark.getpixel(point)==actual.getpixel(point), ('primary colour',point)
+for name in ['demo','detail','empty','detail-empty','large-labels','large-detail']:
+    light=Image.open(SHOTS/(name+'.png')).convert('RGB')
+    night=Image.open(SHOTS/('dark-'+name+'.png')).convert('RGB')
+    assert ImageChops.difference(light,night).getbbox(), name
+    # Pure colours retain their locations; only neutral surfaces/ink change.
+    for colour in [blue,yellow,actual.getpixel((194,52)),green]:
+        assert [i for i,c in enumerate(light.getdata()) if c==colour] == [i for i,c in enumerate(night.getdata()) if c==colour], (name,colour)
 cols=6;rows=(len(scenes)+cols-1)//cols
 sheet=Image.new('RGB',(cols*216,rows*254),'#dedede');draw=ImageDraw.Draw(sheet)
 for i,(name,*_) in enumerate(scenes):
@@ -92,5 +113,5 @@ for i,(name,*_) in enumerate(scenes):
     sheet.paste(Image.open(SHOTS/(name+'.png')).convert('RGB'),(x,y+22))
 sheet.save(SHOTS/'coverage.png')
 (SHOTS/'coverage.json').write_text(json.dumps({'scenes':[s[0] for s in scenes],
-  'default_demo_pixel_identical':True,'goal_colour_checks':True,'world_clock_checks':True},indent=2)+'\n')
+  'default_demo_pixel_identical':True,'goal_colour_checks':True,'world_clock_checks':True,'dark_palette_checks':True},indent=2)+'\n')
 print(f'Rendered {len(scenes)} scenes; default demo matches original exactly.')

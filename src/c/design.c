@@ -1,4 +1,5 @@
 #include "lab.h"
+#include "face_settings.h"
 #include "kit/kit_calc.h"
 #include "kit/kit_core.h"
 
@@ -58,6 +59,13 @@ typedef struct {
 
 static Face s_face[6];
 static bool s_large_labels;
+static GColor s_paper, s_ink, s_rule;
+static void palette(void) {
+  bool dark = face_dark_mode();
+  s_paper = dark ? GColorBlack : GColorWhite;
+  s_ink = dark ? GColorWhite : GColorBlack;
+  s_rule = dark ? GColorFromHEX(0x555555) : GColorBlack;
+}
 static FaceId caption(void) { return s_large_labels ? FACE_G14 : FACE_PX8; }
 static int display_temp(const LabData *d, int c) {
   return kit_temperature(c,d->temp_fahrenheit);
@@ -158,10 +166,10 @@ static const IconRect ICON_CLOUD[] = {
 
 static GColor icon_color(uint8_t ink) {
   switch (ink) {
-    case 1: return GColorWhite;
+    case 1: return s_paper;
     case 2: return COL_YELLOW;
     case 3: return COL_BLUE;
-    default: return GColorBlack;
+    default: return s_ink;
   }
 }
 
@@ -254,11 +262,11 @@ static void draw_time(GContext *ctx, const LabData *d) {
   int total = wh + gap + dot + gap + wm;
   int x = R_TIME.origin.x + (R_TIME.size.w - total) / 2;
   int y = R_TIME.origin.y + (R_TIME.size.h - s_face[FACE_L42].h) / 2;
-  ink_text(ctx, hh, FACE_L42, x, y, GColorBlack);
+  ink_text(ctx, hh, FACE_L42, x, y, s_ink);
   int cx = x + wh + gap;
-  fill(ctx, GRect(cx, y + 5, dot, dot), GColorBlack);
-  fill(ctx, GRect(cx, y + 18, dot, dot), GColorBlack);
-  ink_text(ctx, mm, FACE_L42, cx + dot + gap, y, GColorBlack);
+  fill(ctx, GRect(cx, y + 5, dot, dot), s_ink);
+  fill(ctx, GRect(cx, y + 18, dot, dot), s_ink);
+  ink_text(ctx, mm, FACE_L42, cx + dot + gap, y, s_ink);
 
   // Second time zone, signed in the corner like Mondrian's "PM".
   char t[8];
@@ -268,12 +276,12 @@ static void draw_time(GContext *ctx, const LabData *d) {
   int right = R_TIME.origin.x + R_TIME.size.w - PAD;
   FaceId nz_font = s_large_labels ? FACE_G18 : FACE_PX8;
   ink_text(ctx, nz, nz_font, right - ink_w(nz, nz_font),
-           R_TIME.origin.y + R_TIME.size.h - PAD - s_face[nz_font].h, GColorBlack);
+           R_TIME.origin.y + R_TIME.size.h - PAD - s_face[nz_font].h, s_ink);
   if (!d->bt_connected) {
     // Exception-only phone plane; the calm clock plane stays open when connected.
-    fill(ctx, GRect(PAD, R_TIME.size.h - 23, 17, 17), GColorBlack);
-    fill(ctx, GRect(PAD + 5, R_TIME.size.h - 20, 7, 11), GColorWhite);
-    fill(ctx, GRect(PAD + 6, R_TIME.size.h - 19, 5, 7), GColorBlack);
+    fill(ctx, GRect(PAD, R_TIME.size.h - 23, 17, 17), s_ink);
+    fill(ctx, GRect(PAD + 5, R_TIME.size.h - 20, 7, 11), s_paper);
+    fill(ctx, GRect(PAD + 6, R_TIME.size.h - 19, 5, 7), s_ink);
     fill(ctx, GRect(PAD + 2, R_TIME.size.h - 15, 13, 3), COL_RED);
   }
 }
@@ -286,15 +294,15 @@ static void draw_date(GContext *ctx, const LabData *d) {
   snprintf(mon, sizeof(mon), "%s", lab_month_abbr(d->now.tm_mon));
   lab_upper(mon);
   if (s_large_labels) {
-    ink_text(ctx, day, FACE_G14, R_DATE.origin.x + 2, PAD, GColorBlack);
-    ink_text(ctx, mon, FACE_G14, R_DATE.origin.x + R_DATE.size.w - 2 - ink_w(mon, FACE_G14), PAD, GColorBlack);
+    ink_text(ctx, day, FACE_G14, R_DATE.origin.x + 2, PAD, s_ink);
+    ink_text(ctx, mon, FACE_G14, R_DATE.origin.x + R_DATE.size.w - 2 - ink_w(mon, FACE_G14), PAD, s_ink);
   } else {
-    cell_label(ctx, R_DATE, day, GColorBlack);
-    cell_label_right(ctx, R_DATE, mon, GColorBlack);
+    cell_label(ctx, R_DATE, day, s_ink);
+    cell_label_right(ctx, R_DATE, mon, s_ink);
   }
   char num[12];
   snprintf(num, sizeof(num), "%d", d->now.tm_mday);
-  cell_value(ctx, R_DATE, num, FACE_L26, GColorBlack);
+  cell_value(ctx, R_DATE, num, FACE_L26, s_ink);
 }
 
 static void draw_heart(GContext *ctx, const LabData *d) {
@@ -320,15 +328,15 @@ static void draw_weather(GContext *ctx, const LabData *d) {
     snprintf(rain, sizeof(rain), "--");
   }
   if (s_large_labels) {
-    cell_label(ctx, c, "RAIN", GColorBlack);
+    cell_label(ctx, c, "RAIN", s_ink);
     ink_text(ctx, rain, FACE_G18, c.origin.x + c.size.w - PAD - ink_w(rain, FACE_G18),
-             c.origin.y + PAD - 1, GColorBlack);
+             c.origin.y + PAD - 1, s_ink);
   } else {
     char line[32]; snprintf(line,sizeof(line),"RAIN %s",rain);
-    cell_label(ctx,c,line,GColorBlack);
+    cell_label(ctx,c,line,s_ink);
   }
   if (!d->weather_ok) {
-    cell_value(ctx, c, "--", FACE_L26, GColorBlack);
+    cell_value(ctx, c, "--", FACE_L26, s_ink);
     return;
   }
   char t[12];
@@ -338,9 +346,9 @@ static void draw_weather(GContext *ctx, const LabData *d) {
   // Temperature + degree square must clear the icon (and its 2 px overhang).
   const int room = c.size.w - 2 * PAD - (icon_w + 2) - 4 - 9;
   FaceId f = ink_w(t, FACE_L26) <= room ? FACE_L26 : FACE_L20;
-  cell_value(ctx, c, t, f, GColorBlack);
+  cell_value(ctx, c, t, f, s_ink);
   int vy = c.origin.y + c.size.h - PAD - s_face[f].h;
-  degree(ctx, c.origin.x + PAD + ink_w(t, f) + 3, vy, GColorBlack, GColorWhite);
+  degree(ctx, c.origin.x + PAD + ink_w(t, f) + 3, vy, s_ink, s_paper);
   draw_icon(ctx, lab_weather_kind(d->weather_code),
             GPoint(c.origin.x + c.size.w - PAD - icon_w, c.origin.y + c.size.h - PAD - 16));
 }
@@ -351,7 +359,7 @@ static void draw_sun(GContext *ctx, const LabData *d) {
   GRect c = R_SUN;
   KitDaylight light=kit_daylight_state(d->weather_ok,d->minute_of_day,d->sunrise_min,d->sunset_min);
   bool day=light==KitDaylightDay;
-  GColor ink = GColorBlack;
+  GColor ink = s_ink;
   if (light!=KitDaylightUnknown) {
     fill(ctx, c, day ? COL_YELLOW : GColorBlack);
     ink = day ? GColorBlack : GColorWhite;
@@ -385,7 +393,7 @@ static void draw_battery(GContext *ctx, const LabData *d) {
   GColor col = d->battery_pct < 40 ? lab_battery_color(d->battery_pct) : COL_GREY;
   fill(ctx, GRect(c.origin.x, c.origin.y, w, c.size.h), col);
   if (divider) {
-    fill(ctx, GRect(c.origin.x + w, c.origin.y, LW, c.size.h), GColorBlack);
+    fill(ctx, GRect(c.origin.x + w, c.origin.y, LW, c.size.h), s_rule);
   }
   // The label goes in whichever part holds it: the full "BAT 76%" where it
   // fits, otherwise just "76%" (one of the two parts always fits that).
@@ -407,7 +415,7 @@ static void draw_battery(GContext *ctx, const LabData *d) {
       return;
     }
     if (rest_w >= need) {
-      ink_text(ctx, texts[i], f, rest_x + inset, y, GColorBlack);
+      ink_text(ctx, texts[i], f, rest_x + inset, y, s_ink);
       return;
     }
   }
@@ -419,9 +427,10 @@ static void draw_steps(GContext *ctx, const LabData *d) {
   KitGoalProgress progress = kit_goal_progress(d->steps_ok ? d->steps : 0, goal);
   const GColor colours[] = {COL_BLUE, COL_YELLOW, COL_GREEN};
   GColor current = colours[progress.cycle % ARRAY_LENGTH(colours)];
-  GColor previous = progress.cycle ? colours[(progress.cycle - 1) % ARRAY_LENGTH(colours)] : GColorWhite;
+  GColor previous = progress.cycle ? colours[(progress.cycle - 1) % ARRAY_LENGTH(colours)] : s_paper;
   GColor current_ink = progress.cycle % 3 == 0 ? GColorWhite : GColorBlack;
-  GColor previous_ink = !progress.cycle || (progress.cycle - 1) % 3 != 0 ? GColorBlack : GColorWhite;
+  GColor previous_ink = !progress.cycle ? s_ink :
+    ((progress.cycle - 1) % 3 != 0 ? GColorBlack : GColorWhite);
   fill(ctx, c, previous);
   bool divider;
   int h = split_len(c.size.h, progress.permille, &divider);
@@ -438,7 +447,7 @@ static void draw_steps(GContext *ctx, const LabData *d) {
   int fill_y = bottom - h;
   fill(ctx, GRect(c.origin.x, fill_y, c.size.w, h), current);
   if (divider) {
-    fill(ctx, GRect(c.origin.x, fill_y - LW, c.size.w, LW), GColorBlack);
+    fill(ctx, GRect(c.origin.x, fill_y - LW, c.size.w, LW), s_rule);
   }
   int remainder_h = c.size.h - h - (divider ? LW : 0);
 
@@ -472,18 +481,19 @@ static void draw_steps(GContext *ctx, const LabData *d) {
 }
 
 static void draw_grid(GContext *ctx) {
-  fill(ctx, GRect(0, MID_Y, 200, LW), GColorBlack);
-  fill(ctx, GRect(V_TOP_X, 0, LW, TOP_H), GColorBlack);
-  fill(ctx, GRect(RIGHT_X, DATE_H, RIGHT_W, LW), GColorBlack);
-  fill(ctx, GRect(V_BOT_X, BOT_Y, LW, 228 - BOT_Y), GColorBlack);
-  fill(ctx, GRect(0, SUN_Y - LW, V_BOT_X, LW), GColorBlack);
-  fill(ctx, GRect(0, BAT_Y - LW, V_BOT_X, LW), GColorBlack);
+  fill(ctx, GRect(0, MID_Y, 200, LW), s_rule);
+  fill(ctx, GRect(V_TOP_X, 0, LW, TOP_H), s_rule);
+  fill(ctx, GRect(RIGHT_X, DATE_H, RIGHT_W, LW), s_rule);
+  fill(ctx, GRect(V_BOT_X, BOT_Y, LW, 228 - BOT_Y), s_rule);
+  fill(ctx, GRect(0, SUN_Y - LW, V_BOT_X, LW), s_rule);
+  fill(ctx, GRect(0, BAT_Y - LW, V_BOT_X, LW), s_rule);
 }
 
 static void draw(GContext *ctx, GRect bounds, const LabData *d) {
   s_large_labels = d->large_labels;
+  palette();
   graphics_context_set_antialiased(ctx, false);
-  fill(ctx, bounds, GColorWhite);
+  fill(ctx, bounds, s_paper);
   draw_heart(ctx, d);
   draw_steps(ctx, d);
   draw_battery(ctx, d);
@@ -516,10 +526,10 @@ static const GRect D_HEART = {{0, DT_HEART_Y}, {200, MID_Y - DT_HEART_Y}};
 static const GRect D_WEEK = {{0, BOT_Y}, {200, 228 - BOT_Y}};
 
 static void detail_time(GContext *ctx, const LabData *d) {
-  cell_label(ctx, D_TIME, d->world_label, GColorBlack);
+  cell_label(ctx, D_TIME, d->world_label, s_ink);
   char t[8];
   lab_fmt_time(t, sizeof(t), d->world_hour, d->world_min, d->is_24h);
-  cell_value(ctx, D_TIME, t, FACE_L20, GColorBlack);
+  cell_value(ctx, D_TIME, t, FACE_L20, s_ink);
 }
 
 // Rain: the highest chance left today and its hour. The plane turns blue when
@@ -546,7 +556,7 @@ static void detail_rain(GContext *ctx, const LabData *d) {
   if (likely) {
     fill(ctx, c, COL_BLUE);
   }
-  GColor ink = likely ? GColorWhite : GColorBlack;
+  GColor ink = likely ? GColorWhite : s_ink;
   if (s_large_labels) {
     cell_label(ctx,c,peak_day ? "RAIN +1" : "RAIN",ink);
     char pct[16];
@@ -597,8 +607,8 @@ static void detail_heart(GContext *ctx, const LabData *d) {
   int bottom = top + c.size.h;
   const int vh = s_face[FACE_L20].h;
   if (lo <= 0 || hi <= 0) {
-    cell_label(ctx, c, label, GColorBlack);
-    cell_value(ctx, c, "--", FACE_L20, GColorBlack);
+    cell_label(ctx, c, label, s_ink);
+    cell_value(ctx, c, "--", FACE_L20, s_ink);
     return;
   }
   int xa = bpm_x(lo);
@@ -616,10 +626,10 @@ static void detail_heart(GContext *ctx, const LabData *d) {
   }
   fill(ctx, GRect(xa, top, xb - xa, c.size.h), COL_RED);
   if (xa > 0) {
-    fill(ctx, GRect(xa - LW, top, LW, c.size.h), GColorBlack);
+    fill(ctx, GRect(xa - LW, top, LW, c.size.h), s_rule);
   }
   if (xb < 200) {
-    fill(ctx, GRect(xb, top, LW, c.size.h), GColorBlack);
+    fill(ctx, GRect(xb, top, LW, c.size.h), s_rule);
   }
   char lo_s[12];
   char hi_s[12];
@@ -641,14 +651,14 @@ static void detail_heart(GContext *ctx, const LabData *d) {
     int room=left>right ? left : right;
     int x=right>=left ? xb+LW+PAD : PAD;
     if(ink_w(range,FACE_L20)+2*PAD<=room) {
-      ink_text(ctx,label,caption(),x,top+PAD,GColorBlack);
-      ink_text(ctx,range,FACE_L20,x,vy,GColorBlack);
+      ink_text(ctx,label,caption(),x,top+PAD,s_ink);
+      ink_text(ctx,range,FACE_L20,x,vy,s_ink);
     } else {
       // A middle-sized range can fit neither combined label; put its endpoints
       // in the two surrounding white planes instead of crossing black rules.
       ink_text(ctx,label,caption(),xa+PAD,top+PAD,GColorWhite);
-      ink_text(ctx,lo_s,FACE_L20,PAD,vy,GColorBlack);
-      ink_text(ctx,hi_s,FACE_L20,xb+LW+PAD,vy,GColorBlack);
+      ink_text(ctx,lo_s,FACE_L20,PAD,vy,s_ink);
+      ink_text(ctx,hi_s,FACE_L20,xb+LW+PAD,vy,s_ink);
     }
   }
 }
@@ -681,10 +691,10 @@ static void detail_week(GContext *ctx, const LabData *d) {
     GColor col = k == 0 ? COL_RED : COL_BLUE;
     fill(ctx, GRect(x0, bottom - h, w, h), col);
     if (h > 0 && h < c.size.h) {
-      fill(ctx, GRect(x0, bottom - h - LW, w, LW), GColorBlack);
+      fill(ctx, GRect(x0, bottom - h - LW, w, LW), s_rule);
     }
     if (i < 6) {
-      fill(ctx, GRect(x0 + w, c.origin.y, LW, c.size.h), GColorBlack);
+      fill(ctx, GRect(x0 + w, c.origin.y, LW, c.size.h), s_rule);
     }
     char letter[2] = {LETTERS[(d->now.tm_wday - k + 7) % 7], 0};
     FaceId day_font=s_large_labels ? FACE_G18 : FACE_PX8;
@@ -694,24 +704,25 @@ static void detail_week(GContext *ctx, const LabData *d) {
       ink_text(ctx, letter, day_font, lx, bottom - PAD - lh, GColorWhite);
     } else {
       ink_text(ctx, letter, day_font, lx, bottom - h - (h > 0 ? LW : 0) - PAD - lh,
-               GColorBlack);
+               s_ink);
     }
   }
 }
 
 static void draw_detail(GContext *ctx, GRect bounds, const LabData *d) {
   s_large_labels = d->large_labels;
+  palette();
   graphics_context_set_antialiased(ctx, false);
-  fill(ctx, bounds, GColorWhite);
+  fill(ctx, bounds, s_paper);
   detail_week(ctx, d);
   detail_heart(ctx, d);
   detail_rain(ctx, d);
   detail_temp(ctx, d);
   // Grid.
-  fill(ctx, GRect(0, MID_Y, 200, LW), GColorBlack);
-  fill(ctx, GRect(0, DT_ROW_H, 200, LW), GColorBlack);
-  fill(ctx, GRect(D_RAIN.origin.x - LW, 0, LW, DT_ROW_H), GColorBlack);
-  fill(ctx, GRect(D_TEMP.origin.x - LW, 0, LW, DT_ROW_H), GColorBlack);
+  fill(ctx, GRect(0, MID_Y, 200, LW), s_rule);
+  fill(ctx, GRect(0, DT_ROW_H, 200, LW), s_rule);
+  fill(ctx, GRect(D_RAIN.origin.x - LW, 0, LW, DT_ROW_H), s_rule);
+  fill(ctx, GRect(D_TEMP.origin.x - LW, 0, LW, DT_ROW_H), s_rule);
   detail_time(ctx, d);
 }
 

@@ -273,3 +273,30 @@ The tested kit is shared on remote main. The live release is built with
 checksum. Shared/native/phone tests, 1,499,067 reference timezone
 comparisons, all five consumer builds/renders, 100 Mondrian scenes and QEMU
 settings/restart/cache/clock checks pass.
+
+## 1.2.0 dark mode
+
+Open settings → Watchface → Dark mode and Save settings. The optional theme uses
+black neutral panels with white text, dark grey dividers and the original primary
+colours. The original light theme, with black dividers, remains the default.
+It applies to the main and flick views, including
+larger labels, and survives watchface restarts. Dark mode is off by default.
+Existing phone storage, watch settings, step goals and message-key numbers are
+preserved; DARK_MODE is appended to the protocol and uses consumer key 2000.
+The kit owns transport and normalization; Mondrian owns its theme and persistence.
+
+The kit worktree started clean at 2.4.1
+`2dcfa7302bf07aabb9a1f5f0974064b638dd5ac8`. Fetching origin/main confirmed the
+same revision is latest; there is no dependency change for this release.
+Build with `npm run release -- --render`; provenance is written beside the PBW.
+Run `tools/emulator_dark_mode.py` with pebble-tool's Python for live Clay toggles,
+restart persistence, invalid/missing theme payloads, larger labels and detail.
+
+1.2.0 verification: shared/native/phone and consumer checks pass. All 200 render
+scenes pass; the default artwork remains pixel-identical to the original.
+QEMU verifies both Clay toggle directions, theme persistence after restart,
+invalid/missing theme payloads, saved goals, larger labels, detail timeout and
+weather cache. Both sessions exit without app faults or retained allocations;
+the SDK profiles were restored and QEMU stopped. Evidence is in
+`shots/emulator-dark-mode/` and `shots/emulator-smoke/`; compare the themes in
+`shots/dark-comparison.png`.
