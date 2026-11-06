@@ -1,0 +1,25 @@
+Appstore auth preflight...
+API base: https://appstore-api.repebble.com
+Developer link check successful.
+Building app...
+App build successful.
+PBW Metadata
+Using PBW: /private/var/folders/m5/qtm8l1zd3676fg325f0hqbg00000gn/T/mondrian-release-1.3.0-n_ln_bi3/pebble-mondrian/build/pebble-mondrian.pbw
+PBW app UUID: 3bd45600-4ca0-49b6-8129-f840caaf0201
+Name: Mondrian
+PBW Version: 1.3.0
+Publish Version: 1.3.0
+Platforms: emery
+Resolved existing appstore app ID: ffa303a745844dac899c65b4
+Publishing release to Pebble Appstore...
+Waiting for release upload response [                        ]   0sWaiting for release upload response [=                       ]   0sWaiting for release upload response [==                      ]   0sWaiting for release upload response [===                     ]   1sWaiting for release upload response [====                    ]   1sWaiting for release upload response [=====                   ]   1sWaiting for release upload response [======                  ]   1sWaiting for release upload response [=======                 ]   2sWaiting for release upload response [========                ]   2sWaiting for release upload response [=========               ]   2sWaiting for release upload response [========================]   2s
+Release created successfully
+Visit the dashboard to add/edit your changelog: https://appstore-api.repebble.com/dashboard
+App page: https://apps.rePebble.com/ffa303a745844dac899c65b4
+Uploaded screenshots: 2
+
+A new SDK is available: v4.44 (current: v4.33.1)
+  Update with: pebble sdk install latest
+
+A new pebble-tool is available: v5.1.2 (current: v5.0.40)
+  Update with: uv tool upgrade pebble-tool
