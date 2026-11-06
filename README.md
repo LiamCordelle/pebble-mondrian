@@ -4,7 +4,7 @@ A De Stijl composition whose planes respond to your day: red for heart rate,
 blue for steps, yellow for daylight, and a shrinking grey battery plane.
 The tap view recomposes it into a week of steps and heart/weather ranges.
 
-Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.1.0.
+Standalone C watchface, Emery only, 200×228, 64 colours. Version 1.3.0.
 The default demo is **pixel-identical** to the original Watchface Lab proposal.
 Following Liam's review, the original geometry and compact Silkscreen captions
 are the default. Larger labels are an opt-in Clay setting; that setting enlarges
@@ -300,3 +300,33 @@ weather cache. Both sessions exit without app faults or retained allocations;
 the SDK profiles were restored and QEMU stopped. Evidence is in
 `shots/emulator-dark-mode/` and `shots/emulator-smoke/`; compare the themes in
 `shots/dark-comparison.png`.
+
+## 1.3.0 appearance options
+
+Open settings → Watchface → Appearance: Light (default), Dark, or Automatic.
+Choose Grey (default) or White under Dark grid; this only affects the dark theme.
+Both views use the same selection and retain the original primary colours.
+Automatic switches to dark at local sunset and returns to light at sunrise,
+matching the sun cell. It uses existing weather data and minute ticks. With
+weather disabled, stale/missing weather, or unavailable sun times, it uses Light.
+
+Existing 1.2.0 light/dark choices survive the upgrade. The original 4-byte
+watch record at key 2000 and DARK_MODE message number remain intact: 0 Light,
+1 Dark, 2 Automatic. Grid choice uses watch key 2001 and appended DARK_GRID.
+Phone storage remains mondrian-kit-settings-v1. The face owns this policy and
+palette; daylight calculations, weather validity, transport and timing stay in
+the shared kit. No shared implementation was forked or modified.
+
+Dependency check: the kit started clean at 2.4.1
+`2dcfa7302bf07aabb9a1f5f0974064b638dd5ac8`. Fetching origin/main upgraded it to
+shared, tested 2.4.2 `f2ed1e88d8eb3b9075eab4f2ad8cf0675317081d`, which corrects
+sleep totals to Pebble Health's wake-day selection. Existing README/store
+wording edits present before this update were preserved.
+
+Run `npm run release -- --render` for the live PBW and exact provenance. The
+382 deterministic scenes include both grid choices, sunrise/sunset boundary
+comparisons in both views, and disabled/unknown-sun fallback. Native appearance
+tests cover every minute of the day, persistence, original records and invalid
+settings. `tools/emulator_dark_mode.py` checks actual 1.2.0 upgrades, Clay,
+restarts, both views and real minute-tick transitions with synthetic weather;
+its boundary evidence is in `shots/emulator-appearance/`.

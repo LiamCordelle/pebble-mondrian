@@ -33,3 +33,9 @@ shots/emulator-dark-mode/*
 !shots/emulator-dark-mode/*.png
 shots/theme-study/
 shots/charcoal-*.png
+
+# Appearance boundary checks: retain scenarios, images and result summaries.
+shots/emulator-appearance/**/emulator.log
+shots/emulator-appearance/**/commands.log
+shots/emulator-appearance/**/profile-recovery.json
+shots/emulator-appearance/**/*.bin

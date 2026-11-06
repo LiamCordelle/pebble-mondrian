@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.0 — 6 November 2026
+
+- Offer Light (default), Dark, and Automatic appearance modes. Automatic uses
+  the same local sunrise/sunset decision as the sun cell and falls back to
+  Light when weather is disabled or valid sun times are unavailable.
+- Add Grey (default) or White grid lines for dark mode in both views.
+- Preserve existing light/dark choices, saved goals, phone storage and message
+  key numbers. Append only the new grid key.
+- Upgrade shared kit 2.4.1 to the latest tested 2.4.2, including its sleep-data fix.
+
 ## 1.2.0 — 2 November 2026
 
 - Add an optional Dark mode toggle under Watchface settings. Use black

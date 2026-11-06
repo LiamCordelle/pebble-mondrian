@@ -1,7 +1,7 @@
 {
   "name": "pebble-mondrian",
   "author": "Liam Cordelle",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "keywords": [
     "pebble-app"
   ],
@@ -38,7 +38,8 @@
       "WEATHER_ENABLED",
       "DEMO_FALLBACK",
       "LARGE_LABELS",
-      "DARK_MODE"
+      "DARK_MODE",
+      "DARK_GRID"
     ],
     "resources": {
       "media": [

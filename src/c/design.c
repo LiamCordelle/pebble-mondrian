@@ -60,11 +60,11 @@ typedef struct {
 static Face s_face[6];
 static bool s_large_labels;
 static GColor s_paper, s_ink, s_rule;
-static void palette(void) {
-  bool dark = face_dark_mode();
+static void palette(const LabData *data) {
+  bool dark = face_dark_mode(data);
   s_paper = dark ? GColorBlack : GColorWhite;
   s_ink = dark ? GColorWhite : GColorBlack;
-  s_rule = dark ? GColorFromHEX(0x555555) : GColorBlack;
+  s_rule = dark ? (face_settings_get().white_grid ? GColorWhite : GColorFromHEX(0x555555)) : GColorBlack;
 }
 static FaceId caption(void) { return s_large_labels ? FACE_G14 : FACE_PX8; }
 static int display_temp(const LabData *d, int c) {
@@ -491,7 +491,7 @@ static void draw_grid(GContext *ctx) {
 
 static void draw(GContext *ctx, GRect bounds, const LabData *d) {
   s_large_labels = d->large_labels;
-  palette();
+  palette(d);
   graphics_context_set_antialiased(ctx, false);
   fill(ctx, bounds, s_paper);
   draw_heart(ctx, d);
@@ -711,7 +711,7 @@ static void detail_week(GContext *ctx, const LabData *d) {
 
 static void draw_detail(GContext *ctx, GRect bounds, const LabData *d) {
   s_large_labels = d->large_labels;
-  palette();
+  palette(d);
   graphics_context_set_antialiased(ctx, false);
   fill(ctx, bounds, s_paper);
   detail_week(ctx, d);

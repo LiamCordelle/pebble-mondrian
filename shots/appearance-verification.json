@@ -1,0 +1,17 @@
+{
+  "version": "1.3.0",
+  "default_appearance": "Light",
+  "default_dark_grid": "Grey",
+  "kit_before": "2dcfa7302bf07aabb9a1f5f0974064b638dd5ac8",
+  "kit_after": "f2ed1e88d8eb3b9075eab4f2ad8cf0675317081d",
+  "render_scenes": 382,
+  "automatic_frame_comparisons": 40,
+  "native_daylight_minutes_checked": 1440,
+  "qemu_legacy_upgrade": true,
+  "qemu_all_modes_and_grid_persistence": true,
+  "qemu_live_sunset_and_sunrise": true,
+  "qemu_fresh_light_default": true,
+  "qemu_shared_smoke": true,
+  "all_emulator_profiles_restored": true,
+  "pbw_sha256": "000cc01399fdc7460147bfb570adaed688b7862dc9e6308b17949ed88a815a17"
+}

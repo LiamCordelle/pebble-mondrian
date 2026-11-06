@@ -50,9 +50,29 @@ for name,zone in [('mumbai',289),('abu-dhabi',268),('moscow',463),
                            0,detail,{'WORLD':zone,'LARGE_LABELS':int(large)}))
 for name,code in [('sun',0),('partly',2),('cloud',3),('rain',63),('snow',73),('storm',95),('fog',45)]:
     scenes.append(('weather-'+name,0,False,{'WEATHER_CODE':code}))
-# Exercise both palettes through every existing visual edge case.
+# Exercise each palette through the original visual edge cases.
+base_scenes=list(scenes)
 scenes += [('dark-'+name,scenario,detail,dict(values,DARK_MODE=1))
-           for name,scenario,detail,values in list(scenes)]
+           for name,scenario,detail,values in base_scenes]
+scenes += [('white-grid-'+name,scenario,detail,dict(values,DARK_MODE=1,DARK_GRID=1))
+           for name,scenario,detail,values in base_scenes]
+auto_checks=[]
+for name,hour,minute,dark,extra in [
+    ('before-rise',7,28,True,{}),('at-rise',7,29,False,{}),('after-rise',7,30,False,{}),
+    ('before-set',18,2,False,{}),('at-set',18,3,True,{}),('after-set',18,4,True,{}),
+    ('midnight',0,0,True,{}),('noon',12,0,False,{}),
+    ('unknown-sun',21,0,False,{'NO_SUN':1}),
+    ('disabled-weather',21,0,False,{'WEATHER_DISABLED':1})]:
+    for grid in [0,1]:
+        for detail in [False,True]:
+            suffix=('-white' if grid else '-grey')+('-detail' if detail else '')
+            values=dict(extra,HOUR=hour,MINUTE=minute,DARK_GRID=grid)
+            automatic='auto-'+name+suffix;manual='manual-'+name+suffix
+            scenes.append((automatic,0,detail,dict(values,DARK_MODE=2)))
+            scenes.append((manual,0,detail,dict(values,DARK_MODE=int(dark))))
+            auto_checks.append((automatic,manual))
+scenes += [('light-white-grid',0,False,{'DARK_GRID':1}),
+           ('light-white-grid-detail',0,True,{'DARK_GRID':1})]
 def render(scene):
     name,scenario,detail,values=scene
     env=os.environ.copy()
@@ -104,7 +124,15 @@ for name in ['demo','detail','empty','detail-empty','large-labels','large-detail
     assert ImageChops.difference(light,night).getbbox(), name
     # Pure colours retain their locations; only neutral surfaces/ink change.
     for colour in [blue,yellow,actual.getpixel((194,52)),green]:
-        assert [i for i,c in enumerate(light.getdata()) if c==colour] == [i for i,c in enumerate(night.getdata()) if c==colour], (name,colour)
+        assert bytes(c==colour for c in light.get_flattened_data()) == bytes(c==colour for c in night.get_flattened_data()), (name,colour)
+for point in [(140,10),(10,104),(82,110)]:
+    assert Image.open(SHOTS/'white-grid-demo.png').convert('RGB').getpixel(point)==white
+for automatic,manual in auto_checks:
+    left=Image.open(SHOTS/(automatic+'.png')).convert('RGB')
+    right=Image.open(SHOTS/(manual+'.png')).convert('RGB')
+    assert ImageChops.difference(left,right).getbbox() is None, automatic
+for optional,original in [('light-white-grid','demo'),('light-white-grid-detail','detail')]:
+    assert ImageChops.difference(Image.open(SHOTS/(optional+'.png')),Image.open(SHOTS/(original+'.png'))).getbbox() is None
 cols=6;rows=(len(scenes)+cols-1)//cols
 sheet=Image.new('RGB',(cols*216,rows*254),'#dedede');draw=ImageDraw.Draw(sheet)
 for i,(name,*_) in enumerate(scenes):
@@ -113,5 +141,5 @@ for i,(name,*_) in enumerate(scenes):
     sheet.paste(Image.open(SHOTS/(name+'.png')).convert('RGB'),(x,y+22))
 sheet.save(SHOTS/'coverage.png')
 (SHOTS/'coverage.json').write_text(json.dumps({'scenes':[s[0] for s in scenes],
-  'default_demo_pixel_identical':True,'goal_colour_checks':True,'world_clock_checks':True,'dark_palette_checks':True},indent=2)+'\n')
+  'default_demo_pixel_identical':True,'goal_colour_checks':True,'world_clock_checks':True,'dark_palette_checks':True,'white_grid_checks':True,'automatic_full_frame_checks':len(auto_checks)},indent=2)+'\n')
 print(f'Rendered {len(scenes)} scenes; default demo matches original exactly.')

@@ -210,6 +210,9 @@ void lab_data_refresh(LabData *d) {
     memset(d->hr_by_hour,0,sizeof(d->hr_by_hour));
   }
 #endif
+#ifdef LAB_HOST_RENDER
+  if (preview_int("MONDRIAN_WEATHER_DISABLED",0)) d->weather_ok=false;
+#endif
   fill_world_time(d);
   kit_moon_fill(d);
   // Deterministic forecast extensions for the lab's three screenshot scenes.

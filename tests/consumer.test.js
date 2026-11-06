@@ -18,21 +18,34 @@ assert.strictEqual(settings.load(store).STEP_GOAL,18000);
 settings.save(store,settings.load(store));
 assert.strictEqual(JSON.parse(memory[expected]).TEMP_UNIT,1);
 assert.deepStrictEqual(pkg.pebble.messageKeys,['READY','REQUEST_WEATHER','WEATHER_ID','WEATHER',
-  'WEATHER_ERROR','TIME_MODE','TEMP_UNIT','STEP_GOAL','WORLD','WEATHER_ENABLED','DEMO_FALLBACK','LARGE_LABELS','DARK_MODE']);
-var dark=schema.find(function(section){return section.items && section.items.some(function(item){return item.messageKey==='DARK_MODE';});});
-assert(dark);
-assert.strictEqual(dark.items.find(function(item){return item.messageKey==='DARK_MODE';}).defaultValue,false);
+  'WEATHER_ERROR','TIME_MODE','TEMP_UNIT','STEP_GOAL','WORLD','WEATHER_ENABLED','DEMO_FALLBACK','LARGE_LABELS','DARK_MODE','DARK_GRID']);
+var face=schema.find(function(section){return section.items && section.items.some(function(item){return item.messageKey==='DARK_MODE';});});
+var appearance=face.items.find(function(item){return item.messageKey==='DARK_MODE';});
+var grid=face.items.find(function(item){return item.messageKey==='DARK_GRID';});
+assert.strictEqual(appearance.type,'select');
+assert.strictEqual(appearance.defaultValue,'0');
+assert.deepStrictEqual(appearance.options.map(function(item){return item.value;}),['0','1','2']);
+assert.strictEqual(grid.defaultValue,'0');
+assert.deepStrictEqual(grid.options.map(function(item){return item.value;}),['0','1']);
 assert.strictEqual(settings.normalize({}).DARK_MODE,0);
-assert.strictEqual(settings.load(store).DARK_MODE,0);
-[true,1,'true','1'].forEach(function(value){
-  assert.strictEqual(settings.normalize({DARK_MODE:value}).DARK_MODE,1);
+assert.strictEqual(settings.normalize({}).DARK_GRID,0);
+[0,1].forEach(function(legacy){
+  memory[expected]=JSON.stringify({TIME_MODE:2,TEMP_UNIT:1,STEP_GOAL:18000,DARK_MODE:legacy});
+  assert.strictEqual(settings.load(store).DARK_MODE,legacy);
+  assert.strictEqual(settings.load(store).DARK_GRID,0);
 });
-[false,0,'false','0',null,'invalid',2].forEach(function(value){
-  assert.strictEqual(settings.normalize({DARK_MODE:value}).DARK_MODE,0);
+[0,1,2].forEach(function(value){
+  assert.strictEqual(settings.normalize({DARK_MODE:String(value)}).DARK_MODE,value);
+  assert.strictEqual(settings.normalize({DARK_MODE:{value:String(value)}}).DARK_MODE,value);
 });
-var saved=settings.load(store);saved.DARK_MODE=1;settings.save(store,saved);
-assert.strictEqual(settings.load(store).DARK_MODE,1);
+[null,'invalid',false].forEach(function(value){
+  assert.strictEqual(settings.normalize({DARK_MODE:value,DARK_GRID:value}).DARK_MODE,0);
+  assert.strictEqual(settings.normalize({DARK_MODE:value,DARK_GRID:value}).DARK_GRID,0);
+});
+var saved=settings.load(store);saved.DARK_MODE=2;saved.DARK_GRID=1;settings.save(store,saved);
+assert.strictEqual(settings.load(store).DARK_MODE,2);
+assert.strictEqual(settings.load(store).DARK_GRID,1);
 assert.strictEqual(settings.load(store).STEP_GOAL,18000);
 assert.strictEqual(settings.load(store).TIME_MODE,2);
 assert.strictEqual(settings.load(store).TEMP_UNIT,1);
-console.log(pkg.pebble.displayName+' consumer checks passed: UI, existing settings and message-key compatibility.');
+console.log(pkg.pebble.displayName+' consumer checks passed: appearance UI, legacy settings and message-key compatibility.');
